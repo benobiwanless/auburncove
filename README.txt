@@ -1,5 +1,7 @@
-Auburn Cove homepage links update
+AUBURN COVE COMMUNITY PAGE UPDATE
 
-Upload index.html to the ROOT of your GitHub repository benobiwanless/auburncove and replace the existing index.html. Do not remove portal.html, portal.js, portal.css, styles.css, script.js or entrance-sign.jpg.
+Upload index.html, styles.css, script.js, and dog-park.webp to the ROOT of your existing GitHub Pages repository, replacing the first three files when prompted.
 
-This update directs homepage Documents, Rules and Resident Login links to portal.html and replaces the old coming-soon login section. No private files belong in GitHub.
+Keep entrance-sign.jpg and all portal files already in GitHub.
+
+This update adds the About Auburn Cove community text and the aerial dog park photo. It does not modify the homepage layout or secure portal.
