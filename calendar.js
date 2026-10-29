@@ -58,7 +58,10 @@
       if (key === fmtDay(today)) b.classList.add('is-today');
       if (key === selected) b.classList.add('is-selected');
       const number = document.createElement('span'); number.className='ac-day-number'; number.textContent=d.getMonth() === shown.getMonth() ? d.getDate() : ''; b.append(number);
-      (d.getMonth() === shown.getMonth() ? matches : []).slice(0,2).forEach(e => {const chip=document.createElement('span');chip.className='ac-event-chip';chip.textContent=e.title;b.append(chip);});
+      (d.getMonth() === shown.getMonth() ? matches : []).slice(0,2).forEach(e => {const chip=document.createElement('span');chip.className='ac-event-chip';const timeMatch = (e.displayDate || '').match(/(?:^|\s·\s)(\d{1,2}:\d{2}\s*[AP]M)(?:$|\s·\s)/i);
+        chip.textContent = (timeMatch ? timeMatch[1] + ' · ' : '') + (e.title || 'Community event');
+        chip.title = [e.displayDate, e.title, e.location].filter(Boolean).join(' · ');
+        b.append(chip);});
       if (d.getMonth() === shown.getMonth() && matches.length > 2) {const more=document.createElement('span');more.className='ac-more';more.textContent=`+${matches.length-2} more`;b.append(more);}
       if (d.getMonth() === shown.getMonth()) b.addEventListener('click',()=>{selected=key;render();});
       grid.append(b);
