@@ -14,29 +14,30 @@
   const monthStart = fmtDay(shown);
   const monthEnd = fmtDay(new Date(shown.getFullYear(), shown.getMonth()+1, 0));
   const byDay = (day) => events.filter(e => eventDay(e) <= day && (e.endDate || eventDay(e)) >= day);
-  function renderDetails(day) {
-    details.replaceChildren();
-    const h = document.createElement('h3');
-    h.textContent = day ? `Events for ${new Date(day+'T12:00:00').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}` : 'Upcoming Events';
-    details.append(h);
-    const upcoming = day ? byDay(day) : events.filter(e => eventDay(e) <= monthEnd && (e.endDate || eventDay(e)) >= fmtDay(new Date())).slice(0,12);
+  const homeEvents = document.getElementById('home-upcoming-list');
+  function renderHomeEvents() {
+    if (!homeEvents) return;
+    homeEvents.replaceChildren();
+    const now = new Date();
+    const todayKey = fmtDay(now);
+    const endOfMonth = fmtDay(new Date(now.getFullYear(), now.getMonth()+1, 0));
+    const upcoming = events.filter(e => eventDay(e) <= endOfMonth && (e.endDate || eventDay(e)) >= todayKey).sort((a,b) => eventDay(a).localeCompare(eventDay(b))).slice(0, 4);
     if (!upcoming.length) {
-      const p = document.createElement('p');
-      p.textContent = loadError ? 'Events could not be loaded. Check calendar publishing settings.' : 'No events listed yet.';
-      details.append(p);
-      return;
+      const p = document.createElement('p'); p.className = 'home-events-empty';
+      p.textContent = loadError ? 'Events are temporarily unavailable.' : 'No more events scheduled this month. Check back for updates.';
+      homeEvents.append(p); return;
     }
     upcoming.forEach(e => {
-      const item = document.createElement('div'); item.className = 'ac-event-detail';
-      const strong = document.createElement('strong'); strong.textContent = escapeText(e.title || 'Community event');
-      item.append(strong);
-      const meta = document.createElement('small');
-      meta.textContent = [e.displayDate, e.location].filter(Boolean).join(' · ');
-      item.append(meta);
-      if (e.description) {
-        const p = document.createElement('p'); p.textContent = escapeText(e.description); item.append(p);
-      }
-      details.append(item);
+      const item = document.createElement('article'); item.className = 'home-event';
+      const d = new Date(eventDay(e)+'T12:00:00');
+      const dateBox = document.createElement('div'); dateBox.className = 'home-event-date';
+      const mon = document.createElement('span'); mon.className='home-event-month'; mon.textContent=d.toLocaleDateString('en-US',{month:'short'});
+      const num = document.createElement('strong'); num.textContent=d.getDate();
+      dateBox.append(mon,num);
+      const body = document.createElement('div'); body.className='home-event-body';
+      const h = document.createElement('h3'); h.textContent=e.title || 'Community event'; body.append(h);
+      const meta = document.createElement('p'); meta.textContent=[e.displayDate,e.location].filter(Boolean).join(' · '); body.append(meta);
+      item.append(dateBox,body); homeEvents.append(item);
     });
   }
   function render() {
@@ -62,7 +63,7 @@
       if (d.getMonth() === shown.getMonth()) b.addEventListener('click',()=>{selected=key;render();});
       grid.append(b);
     }
-    renderDetails(selected);
+    renderHomeEvents();
   }
   render();
   fetch('calendar-events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Not available');return r.json();}).then(data=>{

@@ -1,0 +1,17 @@
+/* Auburn Cove homepage upcoming events */
+.home-upcoming {max-width:1200px;margin:0 auto;padding:55px clamp(20px,4vw,55px) 75px;}
+.home-upcoming-heading {display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:24px;}
+.home-upcoming-heading h2 {margin:6px 0 0;font-size:clamp(30px,3vw,42px);font-weight:500;color:#263b35;}
+.home-upcoming-heading .eyebrow {margin:0;letter-spacing:.17em;font-size:11px;color:#6b826e;}
+.home-calendar-link {color:#2d5443;text-decoration:none;font-weight:600;font-size:14px;white-space:nowrap;padding-bottom:6px;}
+.home-calendar-link:hover {text-decoration:underline;}
+.home-upcoming-list {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.home-event {display:flex;align-items:center;gap:17px;border:1px solid #dce3dd;border-radius:12px;background:#fafaf7;padding:19px 20px;min-width:0;}
+.home-event-date {display:flex;flex-direction:column;justify-content:center;align-items:center;flex:0 0 64px;min-height:70px;border-radius:9px;background:#e4eee6;color:#294838;}
+.home-event-month {font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+.home-event-date strong {font-size:28px;font-weight:600;line-height:1.1;}
+.home-event-body {min-width:0;}
+.home-event-body h3 {margin:0 0 6px;color:#253a31;font-size:18px;line-height:1.25;}
+.home-event-body p {margin:0;color:#607169;font-size:13px;line-height:1.55;overflow-wrap:anywhere;}
+.home-events-empty {grid-column:1/-1;padding:28px;border:1px solid #dce3dd;border-radius:12px;background:#fafaf7;color:#607169;}
+@media(max-width:680px){.home-upcoming{padding:35px 18px 55px;}.home-upcoming-list{grid-template-columns:1fr;}.home-upcoming-heading{align-items:start;}.home-calendar-link{font-size:12px;}}
