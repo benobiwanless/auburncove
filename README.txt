@@ -1,1 +1,1 @@
-Replace only index.html in your GitHub repository. This removes the calendar update sentence, public sharing note, and Google Calendar link. The embedded calendar remains unchanged.
+Replace the existing root index.html in your Auburn Cove GitHub repository with this file. Only the Google Calendar iframe was changed. Existing styles.css, script.js and image files remain untouched.
