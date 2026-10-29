@@ -1,7 +1,7 @@
 /* Auburn Cove custom calendar — no embedded Google UI */
 #calendar .community-content { max-width:none; width:100%; padding:48px clamp(14px,3vw,54px) 70px; }
 .ac-calendar { width:100%; margin-top:26px; color:#263b35; }
-.ac-calendar-toolbar { display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom:20px; }
+.ac-calendar-toolbar { display:flex; justify-content:center; align-items:center; gap:14px; margin-bottom:20px; }
 .ac-calendar-toolbar h3 { font-size:clamp(22px,2.5vw,32px); margin:0; text-align:center; }
 .ac-calendar-toolbar button { width:45px; height:45px; border:1px solid #b8c5bc; border-radius:9px; background:#f6f3eb; color:#263b35; cursor:pointer; font-size:30px; line-height:1; }
 .ac-calendar-toolbar button:hover,.ac-calendar-toolbar button:focus-visible { background:#e5ede7; }
