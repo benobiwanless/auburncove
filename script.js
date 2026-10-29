@@ -1,38 +1,55 @@
+// Auburn Cove page navigation: switch views without browser anchor jumps.
 const menu = document.getElementById('menu');
 const nav = document.getElementById('nav');
-menu?.addEventListener('click', () => {
-  const open = nav.classList.toggle('open');
-  menu.setAttribute('aria-expanded', String(open));
-});
-nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-  nav.classList.remove('open');
-  menu?.setAttribute('aria-expanded', 'false');
-}));
 const pages = [...document.querySelectorAll('.site-page')];
 const validPages = new Set(pages.map(page => page.id));
-function showPage() {
-  const requested = location.hash.slice(1);
-  const current = validPages.has(requested) ? requested : 'home';
-  pages.forEach(page => { page.hidden = page.id !== current; });
-  nav?.querySelectorAll('a').forEach(link => {
-    if (link.getAttribute('href') === '#' + current) link.setAttribute('aria-current', 'page');
-    else link.removeAttribute('aria-current');
-  });
-  window.scrollTo(0, 0);
-}
-window.addEventListener('hashchange', showPage);
-showPage();
 
-// Edit newsletters.json to publish newsletter posts without changing page layout.
-fetch('newsletters.json', {cache:'no-store'}).then(r => {if(!r.ok) throw new Error('Not found');return r.json()}).then(items => {
- const target=document.getElementById('newsletter-list');if(!target || !Array.isArray(items) || !items.length)return;
- target.replaceChildren();
- items.forEach(item=>{
-  const article=document.createElement('article');article.className='newsletter-entry';
-  const heading=document.createElement('h3');heading.textContent=item.title || 'Community newsletter';article.append(heading);
-  if(item.date){const time=document.createElement('time');time.textContent=item.date;article.append(time)}
-  if(item.summary){const para=document.createElement('p');para.textContent=item.summary;article.append(para)}
-  if(item.url && /^(https:\/\/|[a-zA-Z0-9_./-]+\.pdf$)/.test(item.url)){const link=document.createElement('a');link.href=item.url;link.textContent='Read newsletter →';link.rel='noopener noreferrer';if(item.url.startsWith('https://'))link.target='_blank';article.append(link)}
-  target.append(article);
- });
-}).catch(()=>{});
+function currentPage() {
+  const name = decodeURIComponent(window.location.hash.slice(1));
+  return validPages.has(name) ? name : 'home';
+}
+
+function showPage(pageName, resetScroll = false) {
+  const selected = validPages.has(pageName) ? pageName : 'home';
+  pages.forEach(page => { page.hidden = page.id !== selected; });
+  if (resetScroll) {
+    // Disable smooth scrolling temporarily so navigation feels like an app.
+    const root = document.documentElement;
+    const previous = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    root.style.scrollBehavior = previous;
+  }
+}
+
+if (menu && nav) {
+  menu.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    menu.setAttribute('aria-expanded', String(open));
+  });
+}
+
+// Intercept internal page links, including the logo and Home button.
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', event => {
+    const target = link.getAttribute('href').slice(1);
+    if (!validPages.has(target)) return;
+    event.preventDefault();
+    if (nav && menu) {
+      nav.classList.remove('open');
+      menu.setAttribute('aria-expanded', 'false');
+    }
+    const changed = currentPage() !== target;
+    if (changed) {
+      history.pushState({ page: target }, '', '#' + target);
+      showPage(target, true);
+    } else {
+      // Clicking the active tab again does nothing: no anchor jump.
+      showPage(target, false);
+    }
+  });
+});
+
+window.addEventListener('popstate', () => showPage(currentPage(), true));
+window.addEventListener('hashchange', () => showPage(currentPage(), true));
+showPage(currentPage());
