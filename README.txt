@@ -1,1 +1,1 @@
-Replace only index.html in your Auburn Cove GitHub repository. The disclaimer footer is now part of the Contact page only. All other pages, navigation, and iPhone icon links remain unchanged.
+Replace the root index.html in your Auburn Cove GitHub Pages repository with this file. The Calendar page now spans the available desktop width and has no outer border; other pages are unchanged.
