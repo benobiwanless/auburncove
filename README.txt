@@ -1,1 +1,1 @@
-Upload index.html, apple-touch-icon.png and app-icon-512.png to the ROOT of the GitHub repository, replacing index.html. Commit changes. On iPhone Safari open the Auburn Cove website, tap Share > Add to Home Screen > Add. If an old shortcut exists, delete it and add again. Note: the icon is shown after iOS refreshes the website icon.
+Replace only index.html in your Auburn Cove GitHub repository. The disclaimer footer is now part of the Contact page only. All other pages, navigation, and iPhone icon links remain unchanged.
