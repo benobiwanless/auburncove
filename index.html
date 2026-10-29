@@ -7,6 +7,11 @@
 .topbar{padding-left:max(140px,env(safe-area-inset-left))!important;min-height:84px!important}
 @media(max-width:700px){.topbar-logo{width:101.75px!important;height:66px!important}.topbar{padding-left:128px!important}}
 </style><style id="calendar-page-background">#calendar{background:#f1f4f9;min-height:calc(100vh - 64px)}#calendar .google-calendar-section{background:#f1f4f9}</style><style id="homepage-warm-refresh">
+/* Fill the entire visible homepage, including below the content. */
+html:has(#home:not([hidden])),
+body:has(#home:not([hidden])),
+body:has(#home:not([hidden])) main {background:#f7f5f1!important;min-height:100vh;}
+
 #home, #home .hero, #home .hero-copy, #home .home-upcoming { background:#f7f5f1!important; }
 .topbar-logo{width:114.95px!important;height:78.65px!important;}
 .topbar{padding-left:max(153px,env(safe-area-inset-left))!important;min-height:91px!important;}
