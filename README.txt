@@ -1,1 +1,1 @@
-Replace the existing root index.html in your Auburn Cove GitHub repository with this file. Only the Google Calendar iframe was changed. Existing styles.css, script.js and image files remain untouched.
+Replace the root index.html in your Auburn Cove GitHub repository with this file. It adds a Documents page linking to Sentry Management. Keep your existing styles.css, script.js and images unchanged.
