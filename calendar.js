@@ -1,7 +1,6 @@
 (() => {
   const grid = document.getElementById('ac-calendar-grid');
-  // The Google Calendar embed replaces the old custom grid.
-  // Homepage events must still load when that grid is absent.
+  // Google Calendar is embedded on its own page; the homepage cards load independently.
   const title = document.getElementById('ac-month-title');
   const today = new Date();
   const shown = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -144,7 +143,38 @@
     renderHomeEvents();
   }
   render();
-  fetch('calendar-events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Not available');return r.json();}).then(data=>{
-    events=Array.isArray(data)?data:[];loadError=false;render();
-  }).catch(()=>{loadError=true;render();});
+  // Paste your deployed Apps Script Web App /exec URL here (not the /dev URL).
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz32slb6RWVXbJ89Xq0jUc013vQy0JO3vfrdKR6tmE4qFyvrMpYg7GRQtOydZJesPq2/exec';
+  let requestId = 0;
+  let liveLoaded = false;
+  function loadEvents() {
+    if (!APPS_SCRIPT_URL.startsWith('https://script.google.com/macros/s/')) {
+      console.warn('Auburn Cove: paste the Google Apps Script deployment URL into calendar.js');
+      return;
+    }
+    const id = ++requestId;
+    const previous = document.getElementById('ac-live-feed-script');
+    if (previous) previous.remove();
+    const script = document.createElement('script');
+    script.id = 'ac-live-feed-script';
+    script.src = APPS_SCRIPT_URL + (APPS_SCRIPT_URL.includes('?') ? '&' : '?') + 't=' + Date.now();
+    script.onerror = () => { if (id === requestId) console.warn('Auburn Cove: live calendar request failed; showing saved events.'); };
+    document.head.append(script);
+  }
+  window.auburnCoveReceiveEvents = (data) => {
+    if (!Array.isArray(data)) {
+      console.warn('Auburn Cove: live feed error', data);
+      return;
+    }
+    liveLoaded = true; events = data; loadError = false; render();
+  };
+  // Display saved events immediately while live data loads.
+  fetch('calendar-events.json', {cache:'no-store'})
+    .then(r => { if (!r.ok) throw Error('Not available'); return r.json(); })
+    .then(data => { if (Array.isArray(data) && !liveLoaded) { events=data; loadError=false; render(); } })
+    .catch(() => { if (!liveLoaded) { loadError=true; render(); } });
+  loadEvents();
+  // Refresh live feed every 2 minutes while the page is open.
+  setInterval(() => { if (!document.hidden) loadEvents(); }, 120000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) loadEvents(); });
 })();

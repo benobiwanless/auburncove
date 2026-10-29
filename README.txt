@@ -1,2 +1,1 @@
-Upload BOTH index.html and calendar.js to the root of your GitHub repository.
-Homepage events read calendar-events.json. Google Calendar embed updates independently; GitHub sync remains necessary to refresh homepage JSON.
+Replace calendar.js in your GitHub auburncove repository with the calendar.js in this ZIP. No other files need changing. The Apps Script /exec endpoint must be deployed with Anyone access and use the Code.gs from the previous setup (which calls auburnCoveReceiveEvents). Homepage events reload every 2 minutes while the page is open.
