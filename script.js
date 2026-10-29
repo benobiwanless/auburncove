@@ -22,3 +22,17 @@ function showPage() {
 }
 window.addEventListener('hashchange', showPage);
 showPage();
+
+// Edit newsletters.json to publish newsletter posts without changing page layout.
+fetch('newsletters.json', {cache:'no-store'}).then(r => {if(!r.ok) throw new Error('Not found');return r.json()}).then(items => {
+ const target=document.getElementById('newsletter-list');if(!target || !Array.isArray(items) || !items.length)return;
+ target.replaceChildren();
+ items.forEach(item=>{
+  const article=document.createElement('article');article.className='newsletter-entry';
+  const heading=document.createElement('h3');heading.textContent=item.title || 'Community newsletter';article.append(heading);
+  if(item.date){const time=document.createElement('time');time.textContent=item.date;article.append(time)}
+  if(item.summary){const para=document.createElement('p');para.textContent=item.summary;article.append(para)}
+  if(item.url && /^(https:\/\/|[a-zA-Z0-9_./-]+\.pdf$)/.test(item.url)){const link=document.createElement('a');link.href=item.url;link.textContent='Read newsletter →';link.rel='noopener noreferrer';if(item.url.startsWith('https://'))link.target='_blank';article.append(link)}
+  target.append(article);
+ });
+}).catch(()=>{});
