@@ -1,1 +1,1 @@
-Replace only index.html in the root of your GitHub Pages repository. This removes the Community page and navigation link, keeping Home, Calendar, Newsletter, Contact. Existing styles.css, script.js, images, and newsletters.json remain unchanged. The homepage Read Newsletter button now opens the Newsletter page.
+Replace only index.html in your GitHub repository. This removes the calendar update sentence, public sharing note, and Google Calendar link. The embedded calendar remains unchanged.
