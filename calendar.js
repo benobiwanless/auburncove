@@ -53,10 +53,10 @@
       b.type='button'; b.className='ac-calendar-day';
       b.setAttribute('role','gridcell');
       b.setAttribute('aria-label',d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}) + (matches.length ? `, ${matches.length} events` : ''));
-      if (d.getMonth() !== shown.getMonth()) { b.classList.add('is-other-month'); b.disabled = true; b.setAttribute('aria-hidden','true'); number.textContent = ''; }
+      if (d.getMonth() !== shown.getMonth()) { b.classList.add('is-other-month'); b.disabled = true; b.setAttribute('aria-hidden','true'); }
       if (key === fmtDay(today)) b.classList.add('is-today');
       if (key === selected) b.classList.add('is-selected');
-      const number = document.createElement('span'); number.className='ac-day-number'; number.textContent=d.getDate(); b.append(number);
+      const number = document.createElement('span'); number.className='ac-day-number'; number.textContent=d.getMonth() === shown.getMonth() ? d.getDate() : ''; b.append(number);
       (d.getMonth() === shown.getMonth() ? matches : []).slice(0,2).forEach(e => {const chip=document.createElement('span');chip.className='ac-event-chip';chip.textContent=e.title;b.append(chip);});
       if (d.getMonth() === shown.getMonth() && matches.length > 2) {const more=document.createElement('span');more.className='ac-more';more.textContent=`+${matches.length-2} more`;b.append(more);}
       if (d.getMonth() === shown.getMonth()) b.addEventListener('click',()=>{selected=key;render();});
