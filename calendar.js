@@ -19,7 +19,7 @@
     const h = document.createElement('h3');
     h.textContent = day ? `Events for ${new Date(day+'T12:00:00').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}` : 'Upcoming Events';
     details.append(h);
-    const upcoming = day ? byDay(day) : events.filter(e => eventDay(e) <= monthEnd && (e.endDate || eventDay(e)) >= monthStart).slice(0,12);
+    const upcoming = day ? byDay(day) : events.filter(e => eventDay(e) <= monthEnd && (e.endDate || eventDay(e)) >= fmtDay(new Date())).slice(0,12);
     if (!upcoming.length) {
       const p = document.createElement('p');
       p.textContent = loadError ? 'Events could not be loaded. Check calendar publishing settings.' : 'No events listed yet.';
