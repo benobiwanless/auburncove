@@ -1,6 +1,7 @@
 (() => {
   const grid = document.getElementById('ac-calendar-grid');
-  if (!grid) return;
+  // The Google Calendar embed replaces the old custom grid.
+  // Homepage events must still load when that grid is absent.
   const title = document.getElementById('ac-month-title');
   const today = new Date();
   const shown = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -114,6 +115,7 @@
     });
   }
   function render() {
+    if (!grid || !title) { renderHomeEvents(); return; }
     title.textContent = shown.toLocaleDateString('en-US',{month:'long',year:'numeric'});
     grid.replaceChildren();
     const start = new Date(shown.getFullYear(),shown.getMonth(),1);

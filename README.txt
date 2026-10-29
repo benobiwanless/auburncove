@@ -1,1 +1,2 @@
-Upload index.html, calendar.js and event-popup.css to the ROOT of your existing GitHub repository. Do not remove any other files. Click any dated event in the Calendar or any Upcoming Events card on Home to see the popup. For days with multiple events, choose an event from the popup list. The popup shows title, date/time, location and description from calendar-events.json. Google Calendar sync is unchanged.
+Upload BOTH index.html and calendar.js to the root of your GitHub repository.
+Homepage events read calendar-events.json. Google Calendar embed updates independently; GitHub sync remains necessary to refresh homepage JSON.
