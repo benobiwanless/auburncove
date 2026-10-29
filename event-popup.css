@@ -1,0 +1,17 @@
+/* Auburn Cove event pop-up: shared by Calendar and homepage */
+.ac-event-overlay[hidden]{display:none!important}
+.ac-event-overlay{position:fixed;inset:0;z-index:10000;background:rgba(16,30,25,.65);display:flex;align-items:center;justify-content:center;padding:18px;overflow-y:auto}
+.ac-event-dialog{position:relative;background:#fbfaf6;color:#263b35;border-radius:16px;padding:clamp(25px,4vw,42px);width:min(100%,560px);max-height:90vh;overflow-y:auto;box-shadow:0 24px 70px rgba(0,0,0,.23)}
+.ac-event-close{position:absolute;top:12px;right:15px;width:38px;height:38px;border:0;background:#e9eee8;color:#263b35;border-radius:50%;font-size:27px;line-height:1;cursor:pointer}
+.ac-event-kicker{font:600 11px/1.5 system-ui,sans-serif;letter-spacing:.18em;color:#63826d;margin:0 35px 12px 0}
+.ac-event-title{font-size:clamp(25px,3vw,36px);font-weight:500;line-height:1.15;margin:0 30px 24px 0;color:#263b35}
+.ac-event-meta{font:400 15px/1.65 system-ui,sans-serif;margin:0 0 12px;white-space:pre-wrap;overflow-wrap:anywhere}
+.ac-event-description{border-top:1px solid #d8e2d9;padding-top:17px;margin-top:19px;font:400 15px/1.65 system-ui,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere}
+.ac-event-choice{display:block;width:100%;border:1px solid #d8e2d9;background:#fff;border-radius:10px;padding:14px;text-align:left;margin-top:10px;color:#263b35;cursor:pointer}
+.ac-event-choice:hover,.ac-event-choice:focus-visible{background:#eaf2ec;outline:2px solid #688a75}
+.ac-event-choice strong,.ac-event-choice small{display:block;font-family:system-ui,sans-serif}
+.ac-event-choice small{color:#627468;margin-top:5px}
+.ac-clickable-event{cursor:pointer}
+.ac-clickable-event:hover,.ac-clickable-event:focus-visible{outline:2px solid #779785;outline-offset:3px}
+.ac-modal-open{overflow:hidden}
+@media(max-width:600px){.ac-event-dialog{padding:25px 20px}.ac-event-overlay{align-items:center}}

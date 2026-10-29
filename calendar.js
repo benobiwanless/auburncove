@@ -2,19 +2,74 @@
   const grid = document.getElementById('ac-calendar-grid');
   if (!grid) return;
   const title = document.getElementById('ac-month-title');
-  const details = document.getElementById('ac-calendar-details');
   const today = new Date();
   const shown = new Date(today.getFullYear(), today.getMonth(), 1);
   let selected = null;
   let events = [];
   let loadError = false;
   const fmtDay = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  const escapeText = (v) => String(v ?? '');
   const eventDay = (e) => e.date || (e.start || '').slice(0,10);
   const monthStart = fmtDay(shown);
   const monthEnd = fmtDay(new Date(shown.getFullYear(), shown.getMonth()+1, 0));
   const byDay = (day) => events.filter(e => eventDay(e) <= day && (e.endDate || eventDay(e)) >= day);
   const homeEvents = document.getElementById('home-upcoming-list');
+  // Accessible event details dialog shared by calendar and homepage.
+  const overlay = document.createElement('div');
+  overlay.className = 'ac-event-overlay'; overlay.hidden = true;
+  overlay.innerHTML = `<section class="ac-event-dialog" role="dialog" aria-modal="true" aria-labelledby="ac-dialog-title" tabindex="-1"><button type="button" class="ac-event-close" aria-label="Close event details">×</button><div id="ac-dialog-content"></div></section>`;
+  document.body.append(overlay);
+  const dialog = overlay.querySelector('.ac-event-dialog');
+  const content = overlay.querySelector('#ac-dialog-content');
+  const closeButton = overlay.querySelector('.ac-event-close');
+  let previousFocus = null;
+  function closeDialog() {
+    overlay.hidden = true; document.body.classList.remove('ac-modal-open');
+    if (previousFocus && previousFocus.isConnected) previousFocus.focus();
+  }
+  closeButton.addEventListener('click', closeDialog);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeDialog(); });
+  document.addEventListener('keydown', (e) => {
+    if (overlay.hidden) return;
+    if (e.key === 'Escape') { e.preventDefault(); closeDialog(); }
+    if (e.key === 'Tab') {
+      const focusable = [...dialog.querySelectorAll('button, a[href]')].filter(x => !x.disabled);
+      const first = focusable[0], last = focusable[focusable.length-1];
+      if (!first) return;
+      if (e.shiftKey && document.activeElement === first) {e.preventDefault(); last.focus();}
+      else if (!e.shiftKey && document.activeElement === last) {e.preventDefault(); first.focus();}
+    }
+  });
+  function addDetail(tag, className, value, parent = content) {
+    if (!value) return;
+    const el = document.createElement(tag); el.className = className; el.textContent = value;
+    parent.append(el); return el;
+  }
+  function showEvent(event) {
+    previousFocus = document.activeElement;
+    content.replaceChildren();
+    addDetail('p','ac-event-kicker','AUBURN COVE EVENT');
+    addDetail('h2','ac-event-title',event.title || 'Community event').id = 'ac-dialog-title';
+    addDetail('p','ac-event-meta','📅  ' + (event.displayDate || event.date || 'Date to be announced'));
+    if (event.location) addDetail('p','ac-event-meta','📍  ' + event.location);
+    if (event.description) addDetail('p','ac-event-description',event.description);
+    overlay.hidden = false; document.body.classList.add('ac-modal-open'); closeButton.focus();
+  }
+  function showDay(day) {
+    const matches = byDay(day);
+    if (!matches.length) return;
+    if (matches.length === 1) { showEvent(matches[0]); return; }
+    previousFocus = document.activeElement;
+    content.replaceChildren();
+    addDetail('p','ac-event-kicker','AUBURN COVE EVENTS');
+    addDetail('h2','ac-event-title',new Date(day+'T12:00:00').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})).id = 'ac-dialog-title';
+    matches.forEach(e => {
+      const b=document.createElement('button'); b.type='button'; b.className='ac-event-choice';
+      const name=document.createElement('strong');name.textContent=e.title || 'Community event';
+      const date=document.createElement('small');date.textContent=e.displayDate || '';
+      b.append(name,date);b.addEventListener('click',()=>showEvent(e));content.append(b);
+    });
+    overlay.hidden=false;document.body.classList.add('ac-modal-open');closeButton.focus();
+  }
   function renderHomeEvents() {
     if (!homeEvents) return;
     homeEvents.replaceChildren();
@@ -37,6 +92,10 @@
       const body = document.createElement('div'); body.className='home-event-body';
       const h = document.createElement('h3'); h.textContent=e.title || 'Community event'; body.append(h);
       const meta = document.createElement('p'); meta.textContent=[e.displayDate,e.location].filter(Boolean).join(' · '); body.append(meta);
+      item.classList.add('ac-clickable-event'); item.tabIndex=0; item.setAttribute('role','button');
+      item.setAttribute('aria-label','View details for ' + (e.title || 'community event'));
+      item.addEventListener('click',()=>showEvent(e));
+      item.addEventListener('keydown',(ev)=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();showEvent(e);}});
       item.append(dateBox,body); homeEvents.append(item);
     });
   }
@@ -63,7 +122,7 @@
         chip.title = [e.displayDate, e.title, e.location].filter(Boolean).join(' · ');
         b.append(chip);});
       if (d.getMonth() === shown.getMonth() && matches.length > 2) {const more=document.createElement('span');more.className='ac-more';more.textContent=`+${matches.length-2} more`;b.append(more);}
-      if (d.getMonth() === shown.getMonth()) b.addEventListener('click',()=>{selected=key;render();});
+      if (d.getMonth() === shown.getMonth()) b.addEventListener('click',()=>showDay(key));
       grid.append(b);
     }
     renderHomeEvents();
