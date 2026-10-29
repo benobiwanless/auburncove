@@ -29,6 +29,14 @@ body:has(#home:not([hidden])) main {background:#f7f5f1!important;min-height:100v
   .topbar > #menu { margin-left:auto !important; margin-right:0 !important; flex-shrink:0; }
   .topbar > #nav { right:12px; left:auto; }
 }
+</style><style id="topbar-logo-plus-ten-percent">
+/* Header logo: another 10% larger, desktop and mobile. */
+.topbar-logo{width:126.445px!important;height:86.515px!important;}
+.topbar{padding-left:max(169px,env(safe-area-inset-left))!important;min-height:101px!important;}
+@media(max-width:700px){
+  .topbar-logo{width:123.1175px!important;height:79.86px!important;}
+  .topbar{padding-left:154px!important;min-height:101px!important;}
+}
 </style></head><body>
 <header class="topbar"><a class="topbar-logo" href="#home" aria-label="Auburn Cove — Home"><img src="auburn-cove-logo-transparent.png" alt="Auburn Cove"></a><button class="menu" id="menu" aria-expanded="false" aria-controls="nav">☰ <span class="sr-only">Toggle menu</span></button><nav id="nav" aria-label="Main navigation"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#newsletter">Newsletter</a><a href="#documents">Documents</a><a href="#contact">Contact</a></nav></header>
 <main><div class="site-page" id="home"><section class="hero"><div class="hero-copy"><h1>Your Community,<br><em>Connected.</em></h1><p>Neighborhood events, announcements, and resources—all in one place.</p></div></section>
