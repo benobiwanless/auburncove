@@ -58,6 +58,30 @@ body:has(#home:not([hidden])) main {background:#f7f5f1!important;min-height:100v
 }
 /* Preserve the right-aligned mobile menu and keep its dropdown above content. */
 .topbar #nav { z-index: 1001; }
+</style><style id="auburn-cove-app-page-consistency">
+/* Keep all six views visually continuous with the browser viewport. */
+:root { --ac-page-bg: #f7f5f1; --ac-calendar-bg: #f1f4f9; }
+html, body { margin: 0; min-height: 100%; }
+body { overflow-x: hidden; }
+main { width: 100%; min-height: calc(100vh - 101px); min-height: calc(100dvh - 101px); }
+.site-page { box-sizing: border-box; width: 100%; min-height: calc(100vh - 101px); min-height: calc(100dvh - 101px); margin: 0; border: 0; }
+.site-page[hidden] { display: none !important; }
+#home, #home .hero, #home .hero-copy, #home .home-upcoming,
+#outreach, #newsletter, #documents, #contact { background-color: var(--ac-page-bg) !important; }
+#calendar, #calendar .google-calendar-section { background-color: var(--ac-calendar-bg) !important; }
+/* Remove leftover calendar section whitespace; do not alter its iframe crop. */
+#calendar .google-calendar-section { margin: 0; padding-bottom: 0 !important; border: 0; }
+/* Compact secondary pages while preserving readable, intentional content padding. */
+#outreach .community-content, #newsletter .community-content,
+#documents .community-content { padding-top: clamp(24px, 4vh, 48px); padding-bottom: clamp(24px, 4vh, 48px); }
+#contact .contact { padding-top: clamp(28px, 5vh, 60px); padding-bottom: clamp(28px, 5vh, 60px); }
+/* Contact disclaimer is intentionally dark, not an unwanted border. */
+#contact .site-disclaimer { margin: 0; }
+@media (max-width: 700px) {
+  #outreach .community-content, #newsletter .community-content,
+  #documents .community-content { padding: 26px 20px 32px; }
+  #contact .contact { padding: 32px 20px; }
+}
 </style></head><body>
 <header class="topbar"><a class="topbar-logo" href="#home" aria-label="Auburn Cove — Home"><img src="auburn-cove-logo-transparent.png" alt="Auburn Cove"></a><button class="menu" id="menu" aria-expanded="false" aria-controls="nav">☰ <span class="sr-only">Toggle menu</span></button><nav id="nav" aria-label="Main navigation"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#newsletter">Newsletter</a><a href="#documents">Documents</a><a href="#contact">Contact</a></nav></header>
 <main><div class="site-page" id="home"><section class="hero"><div class="hero-copy"><h1>Your Community,<br><em>Connected.</em></h1><p>Neighborhood events, announcements, and resources—all in one place.</p></div></section>
