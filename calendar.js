@@ -50,7 +50,21 @@
     addDetail('p','ac-event-kicker','AUBURN COVE EVENT');
     addDetail('h2','ac-event-title',event.title || 'Community event').id = 'ac-dialog-title';
     addDetail('p','ac-event-meta','📅  ' + (event.displayDate || event.date || 'Date to be announced'));
-    if (event.location) addDetail('p','ac-event-meta','📍  ' + event.location);
+    if (event.location) {
+      const locationLine = document.createElement('p');
+      locationLine.className = 'ac-event-meta';
+      const pin = document.createElement('span');
+      pin.textContent = '📍  ';
+      const directions = document.createElement('a');
+      directions.textContent = event.location;
+      directions.href = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(event.location) + '&travelmode=driving';
+      directions.target = '_blank';
+      directions.rel = 'noopener noreferrer';
+      directions.title = 'Get driving directions in Google Maps';
+      directions.style.cssText = 'color:#315b46;text-decoration:underline;text-underline-offset:3px;font-weight:600;';
+      locationLine.append(pin, directions);
+      content.append(locationLine);
+    }
     if (event.description) addDetail('p','ac-event-description',event.description);
     overlay.hidden = false; document.body.classList.add('ac-modal-open'); closeButton.focus();
   }
