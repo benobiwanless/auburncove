@@ -82,6 +82,14 @@ main { width: 100%; min-height: calc(100vh - 101px); min-height: calc(100dvh - 1
   #documents .community-content { padding: 26px 20px 32px; }
   #contact .contact { padding: 32px 20px; }
 }
+</style><style id="home-edge-to-edge-fix">
+/* Remove unintended page-edge gutters and extra viewport-height scroll. */
+html:has(#home:not([hidden])),
+body:has(#home:not([hidden])) { background: #f7f5f1 !important; margin: 0 !important; }
+body:has(#home:not([hidden])) main { min-height: calc(100vh - 101px) !important; min-height: calc(100dvh - 101px) !important; background: #f7f5f1 !important; }
+#home { width:100% !important; max-width:none !important; margin:0 !important; padding:0 !important; border:0 !important; box-shadow:none !important; min-height:calc(100vh - 101px) !important; min-height:calc(100dvh - 101px) !important; background:#f7f5f1 !important; }
+#home .hero { width:100%; max-width:none; margin:0; border:0; box-shadow:none; }
+#home .home-upcoming { box-sizing:border-box; width:100%; max-width:none; margin:0; border:0; box-shadow:none; background:#f7f5f1 !important; }
 </style></head><body>
 <header class="topbar"><a class="topbar-logo" href="#home" aria-label="Auburn Cove — Home"><img src="auburn-cove-logo-transparent.png" alt="Auburn Cove"></a><button class="menu" id="menu" aria-expanded="false" aria-controls="nav">☰ <span class="sr-only">Toggle menu</span></button><nav id="nav" aria-label="Main navigation"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#newsletter">Newsletter</a><a href="#documents">Documents</a><a href="#contact">Contact</a></nav></header>
 <main><div class="site-page" id="home"><section class="hero"><div class="hero-copy"><h1>Your Community,<br><em>Connected.</em></h1><p>Neighborhood events, announcements, and resources—all in one place.</p></div></section>
