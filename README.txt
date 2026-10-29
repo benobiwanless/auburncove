@@ -1,5 +1,1 @@
-Auburn Cove Community Outreach update
-
-Upload index.html to the root of your GitHub repository, replacing the existing index.html. No other website files need replacing.
-
-This adds Community Outreach to the menu and includes example event categories with no invented dates. To announce actual events later, edit the Community Outreach section in index.html.
+Upload index.html, apple-touch-icon.png and app-icon-512.png to the ROOT of the GitHub repository, replacing index.html. Commit changes. On iPhone Safari open the Auburn Cove website, tap Share > Add to Home Screen > Add. If an old shortcut exists, delete it and add again. Note: the icon is shown after iOS refreshes the website icon.
