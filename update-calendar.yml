@@ -1,0 +1,28 @@
+name: Update public community calendar
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install calendar libraries
+        run: pip install requests icalendar recurring-ical-events
+      - name: Fetch events from public Google Calendar
+        run: python scripts/sync_calendar.py
+      - name: Publish updated events
+        run: |
+          if ! git diff --quiet -- calendar-events.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add calendar-events.json
+            git commit -m "Update community calendar events"
+            git push
+          fi

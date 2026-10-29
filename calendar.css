@@ -1,0 +1,34 @@
+/* Auburn Cove custom calendar — no embedded Google UI */
+#calendar .community-content { max-width:none; width:100%; padding:48px clamp(14px,3vw,54px) 70px; }
+.ac-calendar { width:100%; margin-top:26px; color:#263b35; }
+.ac-calendar-toolbar { display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom:20px; }
+.ac-calendar-toolbar h3 { font-size:clamp(22px,2.5vw,32px); margin:0; text-align:center; }
+.ac-calendar-toolbar button { width:45px; height:45px; border:1px solid #b8c5bc; border-radius:9px; background:#f6f3eb; color:#263b35; cursor:pointer; font-size:30px; line-height:1; }
+.ac-calendar-toolbar button:hover,.ac-calendar-toolbar button:focus-visible { background:#e5ede7; }
+.ac-calendar-weekdays,.ac-calendar-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); }
+.ac-calendar-weekdays { background:#263b35; color:white; border-radius:10px 10px 0 0; }
+.ac-calendar-weekdays span { padding:13px 2px; text-align:center; font-size:13px; font-weight:600; }
+.ac-calendar-grid { border-left:1px solid #d8e0d9; border-top:1px solid #d8e0d9; }
+.ac-calendar-day { min-width:0; min-height:118px; border:0; border-right:1px solid #d8e0d9; border-bottom:1px solid #d8e0d9; background:white; padding:10px; text-align:left; color:#263b35; font:inherit; cursor:pointer; display:flex; flex-direction:column; align-items:stretch; gap:5px; }
+.ac-calendar-day:hover,.ac-calendar-day:focus-visible { background:#f0f6f1; outline-offset:-3px; }
+.ac-calendar-day.is-other-month { background:#f8f8f6; color:#8b9690; }
+.ac-calendar-day.is-today .ac-day-number { background:#263b35; color:white; border-radius:50%; width:29px; height:29px; display:inline-flex; justify-content:center; align-items:center; }
+.ac-calendar-day.is-selected { background:#eaf3ec; box-shadow:inset 0 0 0 2px #668776; }
+.ac-day-number { font-size:14px; font-weight:650; display:inline-block; }
+.ac-event-chip { background:#e0ebe3; color:#244436; border-radius:5px; font-size:12px; line-height:1.3; padding:5px 6px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ac-more { font-size:11px; color:#5b7564; }
+.ac-calendar-details { margin-top:24px; border-top:1px solid #d8e0d9; padding-top:18px; }
+.ac-calendar-details h3 { font-size:20px; margin:0 0 12px; }
+.ac-calendar-details p { margin:0 0 10px; }
+.ac-event-detail { padding:12px 0; border-bottom:1px solid #e2e7e2; }
+.ac-event-detail strong { display:block; }
+.ac-event-detail small { display:block; color:#52665a; margin:4px 0; }
+@media(max-width:650px) {
+  #calendar .community-content { padding:30px 10px 45px; }
+  .ac-calendar-weekdays span { font-size:11px; padding:10px 0; }
+  .ac-calendar-day { min-height:70px; padding:5px 3px; gap:3px; }
+  .ac-day-number { font-size:12px; }
+  .ac-event-chip { font-size:10px; padding:3px; white-space:normal; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+  .ac-calendar-day.is-today .ac-day-number { width:23px; height:23px; }
+  .ac-more { font-size:9px; }
+}
