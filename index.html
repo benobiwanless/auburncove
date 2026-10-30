@@ -291,10 +291,11 @@ body > footer.site-disclaimer { padding:32px max(24px,calc((100vw - 1100px)/2));
   if (sessionStorage.getItem('auburnContactSent') === '1') {
     sessionStorage.removeItem('auburnContactSent');
     banner.hidden = false;
-    document.getElementById('auburn-success-dismiss').addEventListener('click', function () {
-      banner.hidden = true;
-    });
   }
+  document.getElementById('auburn-success-dismiss').addEventListener('click', function () {
+      banner.hidden = true;
+      sessionStorage.removeItem('auburnContactSent');
+    });
 })();
 // Send the form without leaving the website; return home only after Formspree confirms success.
 (function () {
@@ -318,7 +319,14 @@ body > footer.site-disclaimer { padding:32px max(24px,calc((100vw - 1100px)/2));
       form.reset();
       // Only mark success after Formspree has accepted the submission.
       sessionStorage.setItem('auburnContactSent', '1');
-      window.location.assign(window.location.origin + window.location.pathname + '#home');
+      // Hash navigation usually does not reload this page, so show the confirmation now.
+      const banner = document.getElementById('auburn-success-banner');
+      if (banner) banner.hidden = false;
+      sessionStorage.removeItem('auburnContactSent');
+      window.location.hash = 'home';
+      // If already on #home, ensure the Home section is visible.
+      document.getElementById('home')?.removeAttribute('hidden');
+      banner?.scrollIntoView({ behavior: 'auto', block: 'start' });
     } catch (error) {
       status.textContent = 'Your message could not be sent. Please try again.';
       status.hidden = false;
