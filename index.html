@@ -211,6 +211,41 @@ main, .site-page { min-height:calc(100dvh - 116px) !important; }
   #home .home-upcoming { padding:0 16px 24px !important; }
 }
 </style>
+<style id="auburn-cove-upcoming-two-column-layout">
+/* One event: center its card. Multiple events: chronological order, left-to-right,
+   with no more than two cards per row. */
+#home #home-upcoming-list {
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:16px !important;
+  align-items:stretch !important;
+  justify-content:center !important;
+  width:100% !important;
+  max-width:900px !important;
+  margin:0 auto !important;
+}
+#home #home-upcoming-list > * {
+  box-sizing:border-box !important;
+  width:100% !important;
+  max-width:none !important;
+  min-width:0 !important;
+  margin:0 !important;
+}
+/* A single card should occupy only half the row and sit in the center. */
+#home #home-upcoming-list:has(> :only-child) {
+  grid-template-columns:minmax(0, 1fr) !important;
+}
+#home #home-upcoming-list > :only-child {
+  width:100% !important;
+  max-width:442px !important;
+  justify-self:center !important;
+}
+/* On narrow screens, preserve readable event cards. */
+@media(max-width:650px) {
+  #home #home-upcoming-list {grid-template-columns:minmax(0, 1fr) !important;}
+  #home #home-upcoming-list > * {max-width:442px !important;justify-self:center !important;}
+}
+</style>
 </head><body>
 <header class="topbar"><a class="topbar-logo" href="#home" aria-label="Auburn Cove — Home"><img src="auburn-cove-logo-transparent.png" alt="Auburn Cove"></a><button class="menu" id="menu" aria-expanded="false" aria-controls="nav">☰ <span class="sr-only">Toggle menu</span></button><nav id="nav" aria-label="Main navigation"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#newsletter">Newsletter</a><a href="#documents">Documents</a><a href="#contact">Contact</a></nav></header>
 <main><div class="site-page" id="home"><section class="hero"><div class="hero-copy"><h1>Your Community,<br><em>Connected.</em></h1><p>Neighborhood events, announcements, and resources—all in one place.</p></div></section>
