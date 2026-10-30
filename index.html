@@ -90,7 +90,128 @@ body:has(#home:not([hidden])) main { min-height: calc(100vh - 101px) !important;
 #home { width:100% !important; max-width:none !important; margin:0 !important; padding:0 !important; border:0 !important; box-shadow:none !important; min-height:calc(100vh - 101px) !important; min-height:calc(100dvh - 101px) !important; background:#f7f5f1 !important; }
 #home .hero { width:100%; max-width:none; margin:0; border:0; box-shadow:none; }
 #home .home-upcoming { box-sizing:border-box; width:100%; max-width:none; margin:0; border:0; box-shadow:none; background:#f7f5f1 !important; }
-</style></head><body>
+</style><style id="auburn-cove-centered-app-header">
+/* Same app-style header and hamburger navigation on every screen size. */
+.topbar {
+  position:sticky !important;
+  top:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  box-sizing:border-box !important;
+  width:100% !important;
+  min-height:116px !important;
+  padding:0 18px !important;
+  z-index:1000 !important;
+}
+.topbar .topbar-logo {
+  position:absolute !important;
+  left:50% !important;
+  top:50% !important;
+  transform:translate(-50%,-50%) !important;
+  width:145.412px !important;
+  height:99.492px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  margin:0 !important;
+}
+.topbar .topbar-logo img { max-width:100% !important; max-height:100% !important; object-fit:contain !important; }
+.topbar > #menu {
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  position:relative !important;
+  left:auto !important;
+  right:auto !important;
+  margin:0 auto 0 0 !important;
+  z-index:1003 !important;
+  cursor:pointer;
+}
+.topbar > #nav {
+  position:absolute !important;
+  top:calc(100% - 1px) !important;
+  left:12px !important;
+  right:auto !important;
+  width:min(310px,calc(100vw - 24px)) !important;
+  max-width:calc(100vw - 24px) !important;
+  box-sizing:border-box !important;
+  margin:0 !important;
+  padding:8px !important;
+  background:#fff !important;
+  border:1px solid #e1e6e2 !important;
+  border-radius:0 0 12px 12px !important;
+  box-shadow:0 12px 24px rgba(0,0,0,.13) !important;
+  display:none !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  gap:0 !important;
+  z-index:1002 !important;
+}
+.topbar > #nav.open { display:flex !important; }
+.topbar > #nav a { display:block !important; width:100% !important; box-sizing:border-box !important; padding:12px 14px !important; text-align:left !important; }
+@media(max-width:700px) {
+  .topbar { min-height:111px !important; padding:0 12px !important; }
+  .topbar .topbar-logo { width:141.585px !important; height:91.839px !important; }
+  .topbar > #menu { margin:0 auto 0 0 !important; }
+}
+/* Match page heights to the new fixed-height header. */
+main, .site-page { min-height:calc(100dvh - 116px) !important; }
+@media(max-width:700px) { main, .site-page { min-height:calc(100dvh - 111px) !important; } }
+</style>
+<style id="auburn-cove-centered-page-content">
+/* Center the content, not the entire background, on all six pages. */
+#home .hero,
+#home .home-upcoming,
+#outreach .community-content,
+#newsletter .community-content,
+#documents .community-content,
+#contact .contact {
+  box-sizing:border-box !important;
+  width:100% !important;
+  max-width:1100px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+/* Home: balance the welcome text and event list under the centered logo. */
+#home .hero { display:block !important; min-height:0 !important; }
+#home .hero-copy {
+  box-sizing:border-box !important;
+  width:100% !important;
+  max-width:100% !important;
+  margin:0 auto !important;
+  padding:clamp(24px,5vh,58px) 22px clamp(22px,4vh,44px) !important;
+  text-align:center !important;
+}
+#home .hero-copy h1, #home .hero-copy p { margin-left:auto !important; margin-right:auto !important; }
+#home .home-upcoming { padding:0 22px 32px !important; }
+#home .home-upcoming-heading, #home .home-upcoming-heading h2 { text-align:center !important; }
+#home .home-upcoming-heading { justify-content:center !important; }
+#home .home-upcoming-list { width:100% !important; max-width:900px !important; margin-left:auto !important; margin-right:auto !important; }
+/* Other pages: centered headings and readable content widths. */
+#outreach .community-content, #newsletter .community-content,
+#documents .community-content, #contact .contact {
+  padding-left:clamp(20px,5vw,50px) !important;
+  padding-right:clamp(20px,5vw,50px) !important;
+  text-align:center !important;
+}
+#outreach .community-content > p, #newsletter .community-content > p,
+#documents .community-content > p, #contact .contact > p {
+  max-width:760px; margin-left:auto; margin-right:auto;
+}
+#newsletter .community-content > img { margin-left:auto !important; margin-right:auto !important; }
+#outreach .actions, #documents .actions { justify-content:center !important; }
+#outreach .outreach-events { margin-left:auto !important; margin-right:auto !important; }
+/* The calendar stays wide so its seven columns remain usable. */
+#calendar .google-calendar-section { width:100% !important; margin:0 auto !important; }
+/* The Contact disclaimer retains its full-width dark band and readable text. */
+#contact .site-disclaimer > div { margin-left:auto !important; margin-right:auto !important; }
+@media(max-width:700px) {
+  #home .hero-copy { padding:26px 18px 20px !important; }
+  #home .home-upcoming { padding:0 16px 24px !important; }
+}
+</style>
+</head><body>
 <header class="topbar"><a class="topbar-logo" href="#home" aria-label="Auburn Cove — Home"><img src="auburn-cove-logo-transparent.png" alt="Auburn Cove"></a><button class="menu" id="menu" aria-expanded="false" aria-controls="nav">☰ <span class="sr-only">Toggle menu</span></button><nav id="nav" aria-label="Main navigation"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#newsletter">Newsletter</a><a href="#documents">Documents</a><a href="#contact">Contact</a></nav></header>
 <main><div class="site-page" id="home"><section class="hero"><div class="hero-copy"><h1>Your Community,<br><em>Connected.</em></h1><p>Neighborhood events, announcements, and resources—all in one place.</p></div></section>
 <section class="home-upcoming" aria-labelledby="home-upcoming-title">
