@@ -257,7 +257,8 @@ body:has(#contact:not([hidden])) > footer.site-disclaimer { display:block !impor
 body > footer.site-disclaimer { padding:32px max(24px,calc((100vw - 1100px)/2)); background:#20362e; color:#e5ede7; line-height:1.65; text-align:left; }
 </style></head><body>
 <header class="topbar"><a aria-label="Auburn Cove — Home" class="topbar-logo" href="#home"><img alt="Auburn Cove" src="auburn-cove-logo-transparent.png"/></a><button aria-controls="nav" aria-expanded="false" class="menu" id="menu">☰ <span class="sr-only">Toggle menu</span></button><nav aria-label="Main navigation" id="nav"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#newsletter">Newsletters</a><a href="#documents">Documents</a><a href="#contact">Contact</a></nav></header>
-<main><div class="site-page" id="home"><section class="hero"><div class="hero-copy"><h1>Your Community,<br/><em>Connected.</em></h1><p>Neighborhood events, announcements, and resources—all in one place.</p></div></section>
+<main><div class="site-page" id="home">
+<div id="auburn-success-banner" role="status" aria-live="polite" hidden style="max-width:760px;margin:24px auto 12px;padding:18px 22px;background:#e8f3e9;border:1px solid #8ab399;border-radius:10px;color:#20362e;text-align:center;box-sizing:border-box;box-shadow:0 2px 8px #20362e14"><strong style="display:block;font-size:18px;margin-bottom:5px">✓ Message sent successfully!</strong><span>Thank you for contacting Auburn Cove. Your message has been submitted.</span><button id="auburn-success-dismiss" type="button" aria-label="Dismiss confirmation" style="display:block;margin:12px auto 0;padding:5px 12px;border:1px solid #789b81;border-radius:6px;background:transparent;color:#20362e;cursor:pointer">Close</button></div><section class="hero"><div class="hero-copy"><h1>Your Community,<br/><em>Connected.</em></h1><p>Neighborhood events, announcements, and resources—all in one place.</p></div></section>
 <section aria-labelledby="home-upcoming-title" class="home-upcoming">
 <div class="home-upcoming-heading"><div><h2 id="home-upcoming-title">Upcoming Events</h2></div></div>
 <div aria-live="polite" class="home-upcoming-list" id="home-upcoming-list"><p class="home-events-empty">Loading community events…</p></div>
@@ -283,6 +284,18 @@ body > footer.site-disclaimer { padding:32px max(24px,calc((100vw - 1100px)/2));
 <button type="submit" style="justify-self:center;cursor:pointer;border:0;border-radius:6px;background:#20362e;color:white;padding:13px 30px;font:600 16px inherit;min-height:46px">Send Message</button>
 <p style="text-align:center;font-size:13px;line-height:1.5;color:#56695f;margin:0">Messages are delivered using Formspree, a third-party service. Please do not include sensitive personal information. For emergencies, call 911.</p>
 <p id="auburn-form-status" role="status" aria-live="polite" style="margin:14px auto 0;text-align:center;color:#20362e" hidden></p></form></section></div></main><script src="script.js"></script><script defer="" src="calendar.js"></script><footer class="site-disclaimer"><div style="max-width:1100px;margin:auto"><strong style="display:block;font-size:22px;color:#fff;margin-bottom:8px">Auburn Cove</strong><span style="display:block;font-weight:600;margin-bottom:12px">Community Information &amp; Disclaimer</span><p style="margin:0 0 12px;font-size:14px">This website is provided as a community information resource for Auburn Cove residents and visitors. While reasonable efforts are made to keep information accurate and current, content may contain errors, omissions, or outdated details and is subject to change without notice.</p><p style="margin:0 0 12px;font-size:14px">Official HOA governing documents, policies, notices, and records are maintained by the Association and its management company. In the event of any discrepancy, official Association records and applicable law take precedence over information published here.</p><p style="margin:0 0 16px;font-size:14px">Community event details are provided for convenience and may change or be canceled.</p><div style="border-top:1px solid #52685d;padding-top:12px;font-size:12px;color:#cbd7ce">© 2026 Auburn Cove. Community information website.</div></div></footer><script>
+// Display the success confirmation on Home after the verified submission redirect.
+(function () {
+  const banner = document.getElementById('auburn-success-banner');
+  if (!banner) return;
+  if (sessionStorage.getItem('auburnContactSent') === '1') {
+    sessionStorage.removeItem('auburnContactSent');
+    banner.hidden = false;
+    document.getElementById('auburn-success-dismiss').addEventListener('click', function () {
+      banner.hidden = true;
+    });
+  }
+})();
 // Send the form without leaving the website; return home only after Formspree confirms success.
 (function () {
   const form = document.getElementById('auburn-contact-form');
@@ -303,7 +316,8 @@ body > footer.site-disclaimer { padding:32px max(24px,calc((100vw - 1100px)/2));
       });
       if (!response.ok) throw new Error('Submission was not accepted');
       form.reset();
-      // Navigate to the homepage, not the Contact page.
+      // Only mark success after Formspree has accepted the submission.
+      sessionStorage.setItem('auburnContactSent', '1');
       window.location.assign(window.location.origin + window.location.pathname + '#home');
     } catch (error) {
       status.textContent = 'Your message could not be sent. Please try again.';
