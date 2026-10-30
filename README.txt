@@ -1,1 +1,1 @@
-Replace only calendar.js in the root of your Auburn Cove GitHub repository. The Google Calendar embed stays unchanged. Homepage Upcoming Events now includes today and the following 13 days, crossing month boundaries. Existing four-card limit and layout remain. Google Apps Script currently fetches through the end of next month, so no redeployment is needed.
+Replace index.html in the root of the Auburn Cove GitHub Pages repository. Contact form posts to https://formspree.io/f/mwllnqva. Test a submission and verify receipt in Formspree dashboard and auburncove2020@gmail.com.
