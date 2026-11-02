@@ -292,6 +292,13 @@ h1,h2,h3,.community-content h2{font-family:'Libre Baskerville',Georgia,serif;let
 #home .ac-home-media img{height:clamp(230px,34vw,420px)!important;object-fit:cover!important}
 #home .home-upcoming{padding-bottom:48px!important}
 @media(max-width:700px){#home .hero-copy{padding:28px 18px 22px!important}#home .ac-home-media{width:calc(100% - 24px)!important;margin-bottom:24px!important}#home .ac-home-media img{height:235px!important}}
+</style><style id="auburn-contact-aerial-background">
+/* Contact page only: subtle neighborhood aerial beneath readable content. */
+#contact {position:relative;isolation:isolate;background:#f7f5f1;min-height:calc(100vh - 80px)}
+#contact::before {content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(rgba(247,245,241,.88),rgba(247,245,241,.88)),url("auburn-cove-contact-aerial.jpg") center center / cover no-repeat;}
+#contact .contact {position:relative;z-index:1;}
+#contact .contact form {background:rgba(255,255,255,.82);border:1px solid rgba(216,224,218,.8);border-radius:14px;padding:24px;box-sizing:border-box;}
+@media(max-width:600px){#contact::before{background:linear-gradient(rgba(247,245,241,.92),rgba(247,245,241,.92)),url("auburn-cove-contact-aerial.jpg") center center / cover no-repeat}#contact .contact form{padding:18px}}
 </style></head><body>
 <header class="topbar"><a aria-label="Auburn Cove — Home" class="topbar-logo" href="#home"><img alt="Auburn Cove" src="auburn-cove-logo-transparent.png"/></a><button aria-controls="nav" aria-expanded="false" class="menu" id="menu">☰ <span class="sr-only">Toggle menu</span></button><nav aria-label="Main navigation" id="nav"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#contact">Contact</a><a href="#documents">Documents</a><a href="#zoom">HOA Meeting</a><a href="#newsletter">Newsletters</a></nav></header>
 <main><div class="site-page" id="home">
