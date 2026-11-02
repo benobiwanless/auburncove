@@ -255,31 +255,58 @@ body > footer.site-disclaimer { display:none !important; width:100%; box-sizing:
 body:has(#contact:not([hidden])) > footer.site-disclaimer { display:block !important; }
 
 body > footer.site-disclaimer { padding:32px max(24px,calc((100vw - 1100px)/2)); background:#20362e; color:#e5ede7; line-height:1.65; text-align:left; }
+</style><style id="auburn-professional-refresh">
+/* Auburn Cove visual refresh — scoped so existing site features remain intact */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
+:root{--ac-ink:#23382f;--ac-muted:#52645a;--ac-cream:#f7f5f1;--ac-gold:#b99969}
+body{font-family:'DM Sans',Arial,sans-serif;color:var(--ac-ink)}
+h1,h2,h3,.community-content h2{font-family:'Libre Baskerville',Georgia,serif;letter-spacing:-.025em}
+#home .hero{background:var(--ac-cream)!important}
+#home .hero-copy{max-width:1020px;margin:0 auto;text-align:center;padding:44px 22px 34px!important}
+#home .hero-copy h1{font-family:'Libre Baskerville',Georgia,serif;font-size:clamp(34px,4vw,54px);line-height:1.22;color:var(--ac-ink);letter-spacing:-.035em;margin:0 auto 14px}
+#home .hero-copy p{font-size:clamp(15px,1.5vw,18px);line-height:1.7;color:var(--ac-muted);max-width:640px;margin:0 auto}
+#home .ac-home-media,#home .ac-community-overview{box-sizing:border-box;width:min(1120px,calc(100% - 40px));margin:0 auto}
+#home .ac-home-media{position:relative;overflow:hidden;border-radius:13px;box-shadow:0 12px 36px rgba(22,42,32,.1)}
+#home .ac-home-media img{display:block;width:100%;height:clamp(245px,36vw,450px);object-fit:cover;object-position:center 53%}
+#home .ac-home-media figcaption{position:absolute;right:14px;bottom:12px;background:rgba(20,35,29,.68);color:#fff;border-radius:5px;padding:5px 9px;font-size:11px}
+#home .ac-home-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;max-width:1120px;margin:26px auto 0;padding:0 20px;box-sizing:border-box}
+#home .ac-home-links a{display:block;padding:19px 17px;background:#fff;border:1px solid #e3e7e1;border-radius:10px;color:var(--ac-ink);text-decoration:none;transition:transform .15s,box-shadow .15s}
+#home .ac-home-links a:hover,#home .ac-home-links a:focus-visible{transform:translateY(-2px);box-shadow:0 7px 20px rgba(20,40,28,.09)}
+#home .ac-home-links strong{display:block;font-size:15px;font-weight:700;margin-bottom:5px}
+#home .ac-home-links span{display:block;font-size:13px;line-height:1.5;color:var(--ac-muted)}
+#home .ac-community-overview{margin:44px auto 54px;padding:0 0 4px;text-align:center}
+#home .ac-community-overview h2{font-size:clamp(25px,3vw,33px);margin:0 0 13px;color:var(--ac-ink)}
+#home .ac-community-overview>p{max-width:650px;margin:0 auto 22px;color:var(--ac-muted);line-height:1.7;font-size:15px}
+#home .ac-community-overview figure{margin:0;background:#fff;padding:10px 10px 12px;border:1px solid #e3e7e1;border-radius:12px}
+#home .ac-community-overview img{display:block;width:100%;height:auto;border-radius:6px}
+#home .ac-community-overview figcaption{font-size:12px;line-height:1.5;color:#52645a;margin-top:9px}
+#home .home-upcoming{max-width:1120px!important;margin:0 auto!important;padding-left:20px!important;padding-right:20px!important}
+#home .home-upcoming h2{font-family:'Libre Baskerville',Georgia,serif}
+@media(max-width:760px){#home .ac-home-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 15px}#home .ac-home-media,#home .ac-community-overview{width:calc(100% - 30px)}#home .ac-home-media img{height:255px}#home .hero-copy{padding:28px 18px 25px!important}#home .ac-home-links a{padding:15px 12px}#home .ac-community-overview{margin:35px auto}}
+@media(max-width:360px){#home .ac-home-links{grid-template-columns:1fr}}
 </style></head><body>
 <header class="topbar"><a aria-label="Auburn Cove — Home" class="topbar-logo" href="#home"><img alt="Auburn Cove" src="auburn-cove-logo-transparent.png"/></a><button aria-controls="nav" aria-expanded="false" class="menu" id="menu">☰ <span class="sr-only">Toggle menu</span></button><nav aria-label="Main navigation" id="nav"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#contact">Contact</a><a href="#documents">Documents</a><a href="#zoom">HOA Meeting</a><a href="#newsletter">Newsletters</a></nav></header>
 <main><div class="site-page" id="home">
-<div aria-live="polite" hidden="" id="auburn-success-banner" role="status" style="max-width:760px;margin:24px auto 12px;padding:18px 22px;background:#e8f3e9;border:1px solid #8ab399;border-radius:10px;color:#20362e;text-align:center;box-sizing:border-box;box-shadow:0 2px 8px #20362e14"><strong style="display:block;font-size:18px;margin-bottom:5px">✓ Message sent successfully!</strong><span>Thank you for contacting Auburn Cove. Your message has been submitted.</span><button aria-label="Dismiss confirmation" id="auburn-success-dismiss" style="display:block;margin:12px auto 0;padding:5px 12px;border:1px solid #789b81;border-radius:6px;background:transparent;color:#20362e;cursor:pointer" type="button">Close</button></div><section class="hero"><div class="hero-copy"><h1>Your Community,<br/><em>Connected.</em></h1><p>Neighborhood events, announcements, and resources—all in one place.</p></div></section>
+<div aria-live="polite" hidden="" id="auburn-success-banner" role="status" style="max-width:760px;margin:24px auto 12px;padding:18px 22px;background:#e8f3e9;border:1px solid #8ab399;border-radius:10px;color:#20362e;text-align:center;box-sizing:border-box;box-shadow:0 2px 8px #20362e14"><strong style="display:block;font-size:18px;margin-bottom:5px">✓ Message sent successfully!</strong><span>Thank you for contacting Auburn Cove. Your message has been submitted.</span><button aria-label="Dismiss confirmation" id="auburn-success-dismiss" style="display:block;margin:12px auto 0;padding:5px 12px;border:1px solid #789b81;border-radius:6px;background:transparent;color:#20362e;cursor:pointer" type="button">Close</button></div><section class="hero"><div class="hero-copy"><h1>Your Community,<br/><em>Connected.</em></h1><p>Neighborhood events, announcements, and resources—all in one place.</p></div></section><figure class="ac-home-media"><img alt="Aerial view of homes and streets in Auburn Cove, Auburndale, Florida" loading="eager" src="auburn-cove-neighborhood.jpg"/><figcaption>Auburn Cove · Auburndale, Florida</figcaption></figure><nav aria-label="Popular community resources" class="ac-home-links"><a href="#calendar"><strong>Calendar</strong><span>Meetings and upcoming events</span></a><a href="#newsletter"><strong>Newsletters</strong><span>Monthly community updates</span></a><a href="#documents"><strong>Documents</strong><span>HOA records and resources</span></a><a href="#contact"><strong>Contact</strong><span>Questions and suggestions</span></a></nav>
 <section aria-labelledby="home-upcoming-title" class="home-upcoming">
 <div class="home-upcoming-heading"><div><h2 id="home-upcoming-title">Upcoming Events</h2></div></div>
 <div aria-live="polite" class="home-upcoming-list" id="home-upcoming-list"><p class="home-events-empty">Loading community events…</p></div>
-</section></div>
+</section><section aria-labelledby="ac-community-overview-title" class="ac-community-overview"><h2 id="ac-community-overview-title">Explore Our Community</h2><p>A bird’s-eye view of Auburn Cove, our neighborhood streets, green spaces, and community pond.</p><figure><a aria-label="Open larger aerial neighborhood map in a new tab" href="auburn-cove-aerial-map.jpg" rel="noopener noreferrer" target="_blank"><img alt="Satellite view of Auburn Cove neighborhood and pond" loading="lazy" src="auburn-cove-aerial-map.jpg"/></a><figcaption>Satellite imagery: Google Earth / imagery providers. Click the image to enlarge. Verify source attribution and reuse permissions before publishing.</figcaption></figure></section></div>
 <div class="site-page" hidden="" id="calendar">
 <section aria-label="Auburn Cove community calendar" class="google-calendar-section">
 <div class="google-calendar-crop"><iframe frameborder="0" height="600" loading="lazy" scrolling="no" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;ctz=America%2FNew_York&amp;showPrint=0&amp;showTitle=0&amp;showNav=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;showDate=0&amp;src=NzRjMTQyZjczZTk5MDlhZjg0MTZmZjczNzE0M2EyOTdlOTMyNzRlZjYzNjYzYWRhMjE4ZmQ4MTI2ZGQ0YTkxMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23f6bf26" style="display:block;width:100%;height:600px;border:0" title="Auburn Cove Google Calendar" width="1500"></iframe></div>
 </section>
 </div>
 <div class="site-page" hidden="" id="outreach"><section class="community-content"><p class="eyebrow">GET INVOLVED</p><h2>Community Outreach</h2><p>Community activities and announcements will be shared here when available.</p></section></div>
-<div class="site-page" hidden="" id="newsletter"><section class="community-content"><h2>Auburn Cove Newsletters</h2><p>Read community news, seasonal reminders, neighborhood highlights, and announcements here.</p><div aria-live="polite" class="newsletter-list" id="newsletter-list"><div style="max-width:620px;margin:24px auto;padding:24px;background:#fff;border:1px solid #d8e0da;border-radius:12px;text-align:center"><h3 style="margin:0 0 10px;color:#23382f">November 2026 Newsletter</h3><p style="margin:0 0 18px;color:#52665c">Board updates, community reminders, and seasonal news.</p><a class="btn primary" href="Auburn_Cove_November_2026_Newsletter_Mockup.pdf" target="_blank" rel="noopener noreferrer">View PDF</a></div></div></section></div>
+<div class="site-page" hidden="" id="newsletter"><section class="community-content"><h2>Auburn Cove Newsletters</h2><p>Read community news, seasonal reminders, neighborhood highlights, and announcements here.</p><div aria-live="polite" class="newsletter-list" id="newsletter-list"><div style="max-width:620px;margin:24px auto;padding:24px;background:#fff;border:1px solid #d8e0da;border-radius:12px;text-align:center"><h3 style="margin:0 0 10px;color:#23382f">November 2026 Newsletter</h3><p style="margin:0 0 18px;color:#52665c">Board updates, community reminders, and seasonal news.</p><a class="btn primary" href="Auburn_Cove_November_2026_Newsletter_Mockup.pdf" rel="noopener noreferrer" target="_blank">View PDF</a></div></div></section></div>
 <div class="site-page" hidden="" id="documents"><section class="community-content"><p>Official Auburn Cove HOA documents and homeowner information are maintained through Sentry Management. Visit the management website to access available records and homeowner services.</p><div class="actions"><a class="btn primary" href="https://www.accesssentrymgt.com/dx/sentrywp/index.html" rel="noopener noreferrer" target="_blank">Open Sentry Management Website →</a></div><p><small>You may need to sign in to Sentry Management to view certain documents.</small></p>
 <div style="max-width:650px;margin:28px auto 0;text-align:center">
-  <h3 style="color:#23382f">Need Help Finding a Document?</h3>
-  <p style="color:#52645a;line-height:1.7">If you need help locating a document or information, please visit our <a href="#contact">Contact</a> page and let us know what you're looking for. We'll be happy to help point you in the right direction.</p>
+<h3 style="color:#23382f">Need Help Finding a Document?</h3>
+<p style="color:#52645a;line-height:1.7">If you need help locating a document or information, please visit our <a href="#contact">Contact</a> page and let us know what you're looking for. We'll be happy to help point you in the right direction.</p>
 </div></section></div>
 <div class="site-page" hidden="" id="zoom"><section aria-labelledby="zoom-title" class="zoom-meetings" style="max-width:900px;margin:0 auto;padding:52px 22px 80px;text-align:center;box-sizing:border-box">
-
 <div style="max-width:650px;margin:24px auto 0;background:#fff;border:1px solid #d8e0da;border-radius:14px;padding:36px 26px;box-sizing:border-box">
 <h3 style="font-size:1.35rem;color:#23382f;margin:0 0 18px">Next HOA Meeting: Date TBD</h3>
-
 <div style="background:#e9eee9;border-radius:9px;padding:18px 20px;margin:20px auto;max-width:510px;text-align:center;color:#23382f;line-height:1.6"><strong>Private Homeowner Invitations</strong><p style="margin:7px 0 0">Meeting access details will be emailed to homeowners before each meeting. Please check your email for joining instructions.</p></div>
 <p style="margin:16px auto 0;max-width:520px;line-height:1.7;color:#52665c;font-size:.95rem">During the meeting, homeowners can use the <strong>Raise Hand</strong> feature to request permission to speak. The host will recognize speakers in turn.</p>
 </div>
