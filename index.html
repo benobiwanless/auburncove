@@ -299,8 +299,15 @@ h1,h2,h3,.community-content h2{font-family:'Libre Baskerville',Georgia,serif;let
 #contact .contact {position:relative;z-index:1;}
 #contact .contact form {background:rgba(255,255,255,.82);border:1px solid rgba(216,224,218,.8);border-radius:14px;padding:24px;box-sizing:border-box;}
 @media(max-width:600px){#contact::before{background:linear-gradient(rgba(247,245,241,.92),rgba(247,245,241,.92)),url("auburn-cove-contact-aerial.jpg") center center / cover no-repeat}#contact .contact form{padding:18px}}
+</style><style id="auburn-cove-header-weather">
+/* Compact live Auburndale weather, right side of the shared website header. */
+#ac-header-weather{position:absolute;right:18px;top:50%;transform:translateY(-50%);z-index:1001;display:flex;align-items:center;gap:7px;max-width:calc(50% - 95px);color:#23382f;font:600 13px/1.25 system-ui,-apple-system,Segoe UI,sans-serif;text-align:right}
+#ac-header-weather .weather-icon{font-size:24px;line-height:1}
+#ac-header-weather .weather-place{font-size:11px;opacity:.75;font-weight:500}
+#ac-header-weather .weather-temp{font-size:18px;font-weight:750}
+@media(max-width:600px){#ac-header-weather{right:10px;gap:4px;font-size:11px;max-width:calc(50% - 75px)}#ac-header-weather .weather-icon{font-size:20px}#ac-header-weather .weather-temp{font-size:16px}#ac-header-weather .weather-place{font-size:10px}}
 </style></head><body>
-<header class="topbar"><a aria-label="Auburn Cove — Home" class="topbar-logo" href="#home"><img alt="Auburn Cove" src="auburn-cove-logo-transparent.png"/></a><button aria-controls="nav" aria-expanded="false" class="menu" id="menu">☰ <span class="sr-only">Toggle menu</span></button><nav aria-label="Main navigation" id="nav"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#contact">Contact</a><a href="#documents">Documents</a><a href="#zoom">HOA Meeting</a><a href="#newsletter">Newsletters</a></nav></header>
+<header class="topbar"><a aria-label="Auburn Cove — Home" class="topbar-logo" href="#home"><img alt="Auburn Cove" src="auburn-cove-logo-transparent.png"/></a><button aria-controls="nav" aria-expanded="false" class="menu" id="menu">☰ <span class="sr-only">Toggle menu</span></button><nav aria-label="Main navigation" id="nav"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#contact">Contact</a><a href="#documents">Documents</a><a href="#zoom">HOA Meeting</a><a href="#newsletter">Newsletters</a></nav><div id="ac-header-weather" role="status" aria-live="polite" title="Current weather in Auburndale, Florida"><span class="weather-icon" aria-hidden="true">☀️</span><span><span class="weather-place">Auburndale weather</span><br><span class="weather-temp">--°F</span><span class="weather-condition"></span></span></div></header>
 <main><div class="site-page" id="home">
 <div aria-live="polite" hidden="" id="auburn-success-banner" role="status" style="max-width:760px;margin:24px auto 12px;padding:18px 22px;background:#e8f3e9;border:1px solid #8ab399;border-radius:10px;color:#20362e;text-align:center;box-sizing:border-box;box-shadow:0 2px 8px #20362e14"><strong style="display:block;font-size:18px;margin-bottom:5px">✓ Message sent successfully!</strong><span>Thank you for contacting Auburn Cove. Your message has been submitted.</span><button aria-label="Dismiss confirmation" id="auburn-success-dismiss" style="display:block;margin:12px auto 0;padding:5px 12px;border:1px solid #789b81;border-radius:6px;background:transparent;color:#20362e;cursor:pointer" type="button">Close</button></div><section class="hero"><div class="hero-copy"><h1>Welcome to Auburn Cove</h1><p>Community news, upcoming events, and homeowner resources in one place.</p></div></section><figure class="ac-home-media"><img alt="Aerial view of homes and streets in Auburn Cove, Auburndale, Florida" loading="eager" src="auburn-cove-neighborhood.jpg"/></figure>
 <section aria-labelledby="home-upcoming-title" class="home-upcoming">
@@ -390,5 +397,44 @@ h1,h2,h3,.community-content h2{font-family:'Libre Baskerville',Georgia,serif;let
       button.textContent = 'Send Message';
     }
   });
+})();
+</script><script id="auburn-cove-live-weather">
+(function(){
+ const root=document.getElementById('ac-header-weather');
+ if(!root)return;
+ const codeToWeather=(code,day)=>{
+  if(code===0)return [day?'☀️':'🌙','Clear'];
+  if(code===1||code===2)return [day?'🌤️':'☁️','Partly cloudy'];
+  if(code===3)return ['☁️','Cloudy'];
+  if(code===45||code===48)return ['🌫️','Fog'];
+  if([51,53,55,56,57].includes(code))return ['🌦️','Drizzle'];
+  if([61,63,65,66,67,80,81,82].includes(code))return ['🌧️','Rain'];
+  if([71,73,75,77,85,86].includes(code))return ['❄️','Snow'];
+  if([95,96,99].includes(code))return ['⛈️','Storms'];
+  return ['🌡️','Weather'];
+ };
+ async function updateWeather(){
+  try{
+   const controller=new AbortController();
+   const timeout=setTimeout(()=>controller.abort(),9000);
+   let res;
+   try{res=await fetch('https://api.open-meteo.com/v1/forecast?latitude=28.0653&longitude=-81.7887&current=temperature_2m,weather_code,is_day&temperature_unit=fahrenheit&timezone=America%2FNew_York',{signal:controller.signal,cache:'no-store'});}
+   finally{clearTimeout(timeout)}
+   if(!res.ok)throw Error('Weather unavailable');
+   const data=await res.json(),current=data.current;
+   if(!current||!Number.isFinite(current.temperature_2m))throw Error('Weather unavailable');
+   const [icon,condition]=codeToWeather(current.weather_code,current.is_day===1);
+   root.querySelector('.weather-icon').textContent=icon;
+   root.querySelector('.weather-temp').textContent=Math.round(current.temperature_2m)+'°F';
+   root.querySelector('.weather-condition').textContent=' · '+condition;
+   root.title='Current weather in Auburndale, Florida';
+  }catch(e){
+   root.querySelector('.weather-icon').textContent='🌤️';
+   root.querySelector('.weather-temp').textContent='Weather unavailable';
+   root.querySelector('.weather-condition').textContent='';
+  }
+ }
+ updateWeather();
+ setInterval(updateWeather,15*60*1000);
 })();
 </script></body></html>
