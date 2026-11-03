@@ -300,14 +300,23 @@ h1,h2,h3,.community-content h2{font-family:'Libre Baskerville',Georgia,serif;let
 #contact .contact form {background:rgba(255,255,255,.82);border:1px solid rgba(216,224,218,.8);border-radius:14px;padding:24px;box-sizing:border-box;}
 @media(max-width:600px){#contact::before{background:linear-gradient(rgba(247,245,241,.92),rgba(247,245,241,.92)),url("auburn-cove-contact-aerial.jpg") center center / cover no-repeat}#contact .contact form{padding:18px}}
 </style><style id="auburn-cove-header-weather">
-/* Compact live Auburndale weather, right side of the shared website header. */
-#ac-header-weather{position:absolute;right:18px;top:50%;transform:translateY(-50%);z-index:1001;display:flex;align-items:center;gap:7px;max-width:calc(50% - 95px);color:#23382f;font:600 13px/1.25 system-ui,-apple-system,Segoe UI,sans-serif;text-align:right}
-#ac-header-weather .weather-icon{font-size:24px;line-height:1}
-#ac-header-weather .weather-place{font-size:11px;opacity:.75;font-weight:500}
-#ac-header-weather .weather-temp{font-size:18px;font-weight:750}
-@media(max-width:600px){#ac-header-weather{right:10px;gap:4px;font-size:11px;max-width:calc(50% - 75px)}#ac-header-weather .weather-icon{font-size:20px}#ac-header-weather .weather-temp{font-size:16px}#ac-header-weather .weather-place{font-size:10px}}
+/* Right-aligned weather, vertically centered and clear of the centered logo. */
+#ac-header-weather{
+ position:absolute;right:18px;top:50%;transform:translateY(-50%);
+ z-index:1001;display:flex;flex-direction:column;align-items:flex-end;
+ justify-content:center;gap:2px;width:150px;max-width:calc(50% - 96px);
+ color:#23382f;font:600 13px/1.2 system-ui,-apple-system,Segoe UI,sans-serif;
+ text-align:right;overflow-wrap:break-word;
+}
+#ac-header-weather .weather-temp{display:block;font-size:19px;font-weight:750;line-height:1.1}
+#ac-header-weather .weather-condition{display:block;font-size:12px;font-weight:500;line-height:1.2}
+@media(max-width:700px){
+ #ac-header-weather{right:12px;width:110px;max-width:calc(50% - 86px);gap:2px}
+ #ac-header-weather .weather-temp{font-size:17px}
+ #ac-header-weather .weather-condition{font-size:11px}
+}
 </style></head><body>
-<header class="topbar"><a aria-label="Auburn Cove — Home" class="topbar-logo" href="#home"><img alt="Auburn Cove" src="auburn-cove-logo-transparent.png"/></a><button aria-controls="nav" aria-expanded="false" class="menu" id="menu">☰ <span class="sr-only">Toggle menu</span></button><nav aria-label="Main navigation" id="nav"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#contact">Contact</a><a href="#documents">Documents</a><a href="#zoom">HOA Meeting</a><a href="#newsletter">Newsletters</a></nav><div id="ac-header-weather" role="status" aria-live="polite" title="Current weather in Auburndale, Florida"><span class="weather-icon" aria-hidden="true">☀️</span><span><span class="weather-place">Auburndale weather</span><br><span class="weather-temp">--°F</span><span class="weather-condition"></span></span></div></header>
+<header class="topbar"><a aria-label="Auburn Cove — Home" class="topbar-logo" href="#home"><img alt="Auburn Cove" src="auburn-cove-logo-transparent.png"/></a><button aria-controls="nav" aria-expanded="false" class="menu" id="menu">☰ <span class="sr-only">Toggle menu</span></button><nav aria-label="Main navigation" id="nav"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#contact">Contact</a><a href="#documents">Documents</a><a href="#zoom">HOA Meeting</a><a href="#newsletter">Newsletters</a></nav><div id="ac-header-weather" role="status" aria-live="polite" title="Current weather in Auburndale, Florida"><span class="weather-temp">--°F</span><span class="weather-condition">Loading</span></div></header>
 <main><div class="site-page" id="home">
 <div aria-live="polite" hidden="" id="auburn-success-banner" role="status" style="max-width:760px;margin:24px auto 12px;padding:18px 22px;background:#e8f3e9;border:1px solid #8ab399;border-radius:10px;color:#20362e;text-align:center;box-sizing:border-box;box-shadow:0 2px 8px #20362e14"><strong style="display:block;font-size:18px;margin-bottom:5px">✓ Message sent successfully!</strong><span>Thank you for contacting Auburn Cove. Your message has been submitted.</span><button aria-label="Dismiss confirmation" id="auburn-success-dismiss" style="display:block;margin:12px auto 0;padding:5px 12px;border:1px solid #789b81;border-radius:6px;background:transparent;color:#20362e;cursor:pointer" type="button">Close</button></div><section class="hero"><div class="hero-copy"><h1>Welcome to Auburn Cove</h1><p>Community news, upcoming events, and homeowner resources in one place.</p></div></section><figure class="ac-home-media"><img alt="Aerial view of homes and streets in Auburn Cove, Auburndale, Florida" loading="eager" src="auburn-cove-neighborhood.jpg"/></figure>
 <section aria-labelledby="home-upcoming-title" class="home-upcoming">
@@ -424,14 +433,14 @@ h1,h2,h3,.community-content h2{font-family:'Libre Baskerville',Georgia,serif;let
    const data=await res.json(),current=data.current;
    if(!current||!Number.isFinite(current.temperature_2m))throw Error('Weather unavailable');
    const [icon,condition]=codeToWeather(current.weather_code,current.is_day===1);
-   root.querySelector('.weather-icon').textContent=icon;
+   
    root.querySelector('.weather-temp').textContent=Math.round(current.temperature_2m)+'°F';
-   root.querySelector('.weather-condition').textContent=' · '+condition;
+   root.querySelector('.weather-condition').textContent=condition;
    root.title='Current weather in Auburndale, Florida';
   }catch(e){
-   root.querySelector('.weather-icon').textContent='🌤️';
-   root.querySelector('.weather-temp').textContent='Weather unavailable';
-   root.querySelector('.weather-condition').textContent='';
+   
+   root.querySelector('.weather-temp').textContent='--°F';
+   root.querySelector('.weather-condition').textContent='Unavailable';
   }
  }
  updateWeather();
