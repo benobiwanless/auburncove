@@ -310,13 +310,15 @@ h1,h2,h3,.community-content h2{font-family:'Libre Baskerville',Georgia,serif;let
 }
 #ac-header-weather .weather-temp{display:block;font-size:19px;font-weight:750;line-height:1.1}
 #ac-header-weather .weather-condition{display:block;font-size:12px;font-weight:500;line-height:1.2}
+#ac-header-weather .weather-feels{display:block;font-size:11px;font-weight:400;line-height:1.2;color:#64776b}
 @media(max-width:700px){
  #ac-header-weather{right:12px;width:110px;max-width:calc(50% - 86px);gap:2px}
  #ac-header-weather .weather-temp{font-size:17px}
  #ac-header-weather .weather-condition{font-size:11px}
+ #ac-header-weather .weather-feels{font-size:10px}
 }
 </style></head><body>
-<header class="topbar"><a aria-label="Auburn Cove — Home" class="topbar-logo" href="#home"><img alt="Auburn Cove" src="auburn-cove-logo-transparent.png"/></a><button aria-controls="nav" aria-expanded="false" class="menu" id="menu">☰ <span class="sr-only">Toggle menu</span></button><nav aria-label="Main navigation" id="nav"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#contact">Contact</a><a href="#documents">Documents</a><a href="#zoom">HOA Meeting</a><a href="#newsletter">Newsletters</a></nav><div id="ac-header-weather" role="status" aria-live="polite" title="Current weather in Auburndale, Florida"><span class="weather-temp">--°F</span><span class="weather-condition">Loading</span></div></header>
+<header class="topbar"><a aria-label="Auburn Cove — Home" class="topbar-logo" href="#home"><img alt="Auburn Cove" src="auburn-cove-logo-transparent.png"/></a><button aria-controls="nav" aria-expanded="false" class="menu" id="menu">☰ <span class="sr-only">Toggle menu</span></button><nav aria-label="Main navigation" id="nav"><a href="#home">Home</a><a href="#calendar">Calendar</a><a href="#outreach">Community Outreach</a><a href="#contact">Contact</a><a href="#documents">Documents</a><a href="#zoom">HOA Meeting</a><a href="#newsletter">Newsletters</a></nav><div id="ac-header-weather" role="status" aria-live="polite" title="Current weather in Auburndale, Florida"><span class="weather-temp">--°F</span><span class="weather-condition">Loading</span><span class="weather-feels" hidden></span></div></header>
 <main><div class="site-page" id="home">
 <div aria-live="polite" hidden="" id="auburn-success-banner" role="status" style="max-width:760px;margin:24px auto 12px;padding:18px 22px;background:#e8f3e9;border:1px solid #8ab399;border-radius:10px;color:#20362e;text-align:center;box-sizing:border-box;box-shadow:0 2px 8px #20362e14"><strong style="display:block;font-size:18px;margin-bottom:5px">✓ Message sent successfully!</strong><span>Thank you for contacting Auburn Cove. Your message has been submitted.</span><button aria-label="Dismiss confirmation" id="auburn-success-dismiss" style="display:block;margin:12px auto 0;padding:5px 12px;border:1px solid #789b81;border-radius:6px;background:transparent;color:#20362e;cursor:pointer" type="button">Close</button></div><section class="hero"><div class="hero-copy"><h1>Welcome to Auburn Cove</h1><p>Community news, upcoming events, and homeowner resources in one place.</p></div></section><figure class="ac-home-media"><img alt="Aerial view of homes and streets in Auburn Cove, Auburndale, Florida" loading="eager" src="auburn-cove-neighborhood.jpg"/></figure>
 <section aria-labelledby="home-upcoming-title" class="home-upcoming">
@@ -427,7 +429,7 @@ h1,h2,h3,.community-content h2{font-family:'Libre Baskerville',Georgia,serif;let
    const controller=new AbortController();
    const timeout=setTimeout(()=>controller.abort(),9000);
    let res;
-   try{res=await fetch('https://api.open-meteo.com/v1/forecast?latitude=28.0653&longitude=-81.7887&current=temperature_2m,weather_code,is_day&temperature_unit=fahrenheit&timezone=America%2FNew_York',{signal:controller.signal,cache:'no-store'});}
+   try{res=await fetch('https://api.open-meteo.com/v1/forecast?latitude=28.0653&longitude=-81.7887&current=temperature_2m,apparent_temperature,weather_code,is_day&temperature_unit=fahrenheit&timezone=America%2FNew_York',{signal:controller.signal,cache:'no-store'});}
    finally{clearTimeout(timeout)}
    if(!res.ok)throw Error('Weather unavailable');
    const data=await res.json(),current=data.current;
@@ -436,11 +438,15 @@ h1,h2,h3,.community-content h2{font-family:'Libre Baskerville',Georgia,serif;let
    
    root.querySelector('.weather-temp').textContent=Math.round(current.temperature_2m)+'°F';
    root.querySelector('.weather-condition').textContent=condition;
+   const feels=root.querySelector('.weather-feels');
+   feels.hidden=!Number.isFinite(current.apparent_temperature);
+   if(!feels.hidden)feels.textContent='Feels like '+Math.round(current.apparent_temperature)+'°';
    root.title='Current weather in Auburndale, Florida';
   }catch(e){
    
    root.querySelector('.weather-temp').textContent='--°F';
    root.querySelector('.weather-condition').textContent='Unavailable';
+   root.querySelector('.weather-feels').hidden=true;
   }
  }
  updateWeather();
