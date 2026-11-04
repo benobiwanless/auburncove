@@ -534,4 +534,44 @@ h1,h2,h3,.community-content h2{font-family:'Libre Baskerville',Georgia,serif;let
   updateWeather();
   setInterval(updateWeather,15*60*1000);
 })();
+</script><script id="auburn-cove-swipe-navigation">
+/* Optional horizontal swiping between pages; menu navigation remains available. */
+(function () {
+  const main = document.querySelector('main');
+  const nav = document.getElementById('nav');
+  if (!main || !nav) return;
+  const pages = Array.from(nav.querySelectorAll('a[href^="#"]'))
+    .map(a => a.getAttribute('href').slice(1))
+    .filter(id => document.getElementById(id)?.classList.contains('site-page'));
+  let start = null;
+  const blocked = 'input, textarea, select, button, iframe, [contenteditable="true"], [data-no-swipe]';
+  main.addEventListener('touchstart', function (event) {
+    start = null;
+    if (event.touches.length !== 1 || event.target.closest(blocked)) return;
+    const t = event.touches[0];
+    start = {x:t.clientX, y:t.clientY, time:Date.now()};
+  }, {passive:true});
+  main.addEventListener('touchend', function (event) {
+    if (!start || event.changedTouches.length !== 1) { start = null; return; }
+    const t = event.changedTouches[0];
+    const dx = t.clientX - start.x, dy = t.clientY - start.y;
+    const elapsed = Date.now() - start.time;
+    start = null;
+    // Ignore normal scrolling, slow drags, and small accidental movements.
+    if (Math.abs(dx) < 75 || Math.abs(dx) < Math.abs(dy) * 1.5 || elapsed > 900) return;
+    const active = document.querySelector('main .site-page:not([hidden])');
+    const current = active ? active.id : (location.hash.slice(1) || 'home');
+    const index = pages.indexOf(current);
+    if (index < 0) return;
+    const next = index + (dx < 0 ? 1 : -1);
+    if (next < 0 || next >= pages.length) return;
+    // Reuse existing menu/hash navigation behavior instead of replacing it.
+    const link = Array.from(nav.querySelectorAll('a[href^="#"]'))
+      .find(a => a.getAttribute('href') === '#' + pages[next]);
+    if (link) link.click();
+    else location.hash = pages[next];
+    window.scrollTo({top:0, behavior:'instant'});
+  }, {passive:true});
+  main.addEventListener('touchcancel', function () { start = null; }, {passive:true});
+})();
 </script></body></html>
