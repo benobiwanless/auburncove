@@ -450,41 +450,81 @@ h1,h2,h3,.community-content h2{font-family:'Libre Baskerville',Georgia,serif;let
 })();
 </script><script id="auburn-cove-live-weather">
 (function(){
- const root=document.getElementById('ac-header-weather');
- if(!root)return;
- const codeToWeather=(code,day)=>{
-  if(code===0)return [day?'☀️':'🌙','Clear'];
-  if(code===1||code===2)return [day?'🌤️':'☁️','Partly cloudy'];
-  if(code===3)return ['☁️','Cloudy'];
-  if(code===45||code===48)return ['🌫️','Fog'];
-  if([51,53,55,56,57].includes(code))return ['🌦️','Drizzle'];
-  if([61,63,65,66,67,80,81,82].includes(code))return ['🌧️','Rain'];
-  if([71,73,75,77,85,86].includes(code))return ['❄️','Snow'];
-  if([95,96,99].includes(code))return ['⛈️','Storms'];
-  return ['🌡️','Weather'];
- };
- async function updateWeather(){
-  try{
-   const controller=new AbortController();
-   const timeout=setTimeout(()=>controller.abort(),9000);
-   let res;
-   try{res=await fetch('https://api.open-meteo.com/v1/forecast?latitude=28.0653&longitude=-81.7887&current=temperature_2m,weather_code,is_day&temperature_unit=fahrenheit&timezone=America%2FNew_York',{signal:controller.signal,cache:'no-store'});}
-   finally{clearTimeout(timeout)}
-   if(!res.ok)throw Error('Weather unavailable');
-   const data=await res.json(),current=data.current;
-   if(!current||!Number.isFinite(current.temperature_2m))throw Error('Weather unavailable');
-   const [icon,condition]=codeToWeather(current.weather_code,current.is_day===1);
-   
-   root.querySelector('.weather-temp').textContent=Math.round(current.temperature_2m)+'°F';
-   root.querySelector('.weather-condition').textContent=condition;
-   root.title='Current weather in Auburndale, Florida';
-  }catch(e){
-   
-   root.querySelector('.weather-temp').textContent='--°F';
-   root.querySelector('.weather-condition').textContent='Unavailable';
+  const root = document.getElementById('ac-header-weather');
+  if (!root) return;
+  const tempEl = root.querySelector('.weather-temp');
+  const conditionEl = root.querySelector('.weather-condition');
+  const coords = '28.0653,-81.7887';
+  let stations = null;
+  const describe = (code) => {
+    if (code === 0) return 'Clear';
+    if (code === 1 || code === 2) return 'Partly cloudy';
+    if (code === 3) return 'Cloudy';
+    if (code === 45 || code === 48) return 'Fog';
+    if ([51,53,55,56,57].includes(code)) return 'Drizzle';
+    if ([61,63,65,66,67,80,81,82].includes(code)) return 'Rain';
+    if ([71,73,75,77,85,86].includes(code)) return 'Snow';
+    if ([95,96,99].includes(code)) return 'Storms';
+    return 'Weather';
+  };
+  async function getJSON(url) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8500);
+    try {
+      const response = await fetch(url, {headers: {'Accept':'application/geo+json'}, signal: controller.signal});
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      return await response.json();
+    } finally { clearTimeout(timer); }
   }
- }
- updateWeather();
- setInterval(updateWeather,15*60*1000);
+  async function observedWeather() {
+    if (!stations) {
+      const point = await getJSON('https://api.weather.gov/points/' + coords);
+      const listing = await getJSON(point.properties.observationStations);
+      stations = (listing.features || []).map(f => f.properties && f.properties.stationIdentifier).filter(Boolean).slice(0, 5);
+      if (!stations.length) throw new Error('No observation stations');
+    }
+    for (const station of stations) {
+      try {
+        const data = await getJSON('https://api.weather.gov/stations/' + encodeURIComponent(station) + '/observations/latest');
+        const p = data.properties || {};
+        const c = p.temperature && p.temperature.value;
+        const when = Date.parse(p.timestamp);
+        if (!Number.isFinite(c) || !Number.isFinite(when) || Date.now()-when > 1000*60*100 || when-Date.now()>1000*60*10) continue;
+        let condition = (p.textDescription || '').trim();
+        if (!condition) continue;
+        // Keep compact wording for the existing mobile header.
+        condition = condition.replace(/^Mostly Sunny$/i,'Partly sunny').replace(/^Mostly Clear$/i,'Mostly clear');
+        return {temp: Math.round(c*9/5+32), condition, source: 'NWS observation ('+station+')'};
+      } catch (e) { /* Try another nearby station. */ }
+    }
+    throw new Error('No recent complete station observation');
+  }
+  async function modelWeather() {
+    const u='https://api.open-meteo.com/v1/forecast?latitude=28.0653&longitude=-81.7887&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=America%2FNew_York';
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8500);
+    try {
+      const response=await fetch(u,{signal:controller.signal,cache:'no-store'});
+      if(!response.ok) throw new Error('Model unavailable');
+      const data=await response.json();
+      if(!data.current || !Number.isFinite(data.current.temperature_2m)) throw new Error('Missing temperature');
+      return {temp:Math.round(data.current.temperature_2m),condition:describe(data.current.weather_code),source:'Open-Meteo fallback'};
+    } finally {clearTimeout(timer);}
+  }
+  async function updateWeather(){
+    try {
+      let reading;
+      try {reading=await observedWeather();} catch(e) {reading=await modelWeather();}
+      tempEl.textContent=reading.temp+'°F';
+      conditionEl.textContent=reading.condition;
+      root.title='Auburndale weather — '+reading.source;
+    } catch(e) {
+      tempEl.textContent='--°F';
+      conditionEl.textContent='Unavailable';
+      root.title='Weather currently unavailable';
+    }
+  }
+  updateWeather();
+  setInterval(updateWeather,15*60*1000);
 })();
 </script></body></html>
