@@ -89,13 +89,13 @@
     homeEvents.replaceChildren();
     const now = new Date();
     const todayKey = fmtDay(now);
-    // Rolling 14-day window, including today, across month/year boundaries.
-    const windowEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 13);
+    // Rolling 7-day window, including today, across month/year boundaries.
+    const windowEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 6);
     const endKey = fmtDay(windowEnd);
     const upcoming = events.filter(e => eventDay(e) <= endKey && (e.endDate || eventDay(e)) >= todayKey).sort((a,b) => eventDay(a).localeCompare(eventDay(b))).slice(0, 4);
     if (!upcoming.length) {
       const p = document.createElement('p'); p.className = 'home-events-empty';
-      p.textContent = loadError ? 'Events are temporarily unavailable.' : 'No events scheduled in the next 14 days. Check back for updates.';
+      p.textContent = loadError ? 'Events are temporarily unavailable.' : 'No events scheduled in the next 7 days. Check back for updates.';
       homeEvents.append(p); return;
     }
     upcoming.forEach(e => {
