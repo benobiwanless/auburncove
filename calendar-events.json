@@ -22,5 +22,493 @@
     "displayDate": "Nov 3, 2026",
     "location": "",
     "description": ""
+  },
+  {
+    "date": "2026-11-05",
+    "endDate": "2026-11-05",
+    "title": "Garbage Day",
+    "displayDate": "Nov 5, 2026",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2026-11-12",
+    "endDate": "2026-11-12",
+    "title": "Garbage Day",
+    "displayDate": "Nov 12, 2026",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2026-11-19",
+    "endDate": "2026-11-19",
+    "title": "Garbage Day",
+    "displayDate": "Nov 19, 2026",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2026-11-26",
+    "endDate": "2026-11-26",
+    "title": "Garbage Day",
+    "displayDate": "Nov 26, 2026",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2026-12-03",
+    "endDate": "2026-12-03",
+    "title": "Garbage Day",
+    "displayDate": "Dec 3, 2026",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2026-12-10",
+    "endDate": "2026-12-10",
+    "title": "Garbage Day",
+    "displayDate": "Dec 10, 2026",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2026-12-17",
+    "endDate": "2026-12-17",
+    "title": "Garbage Day",
+    "displayDate": "Dec 17, 2026",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2026-12-24",
+    "endDate": "2026-12-24",
+    "title": "Garbage Day",
+    "displayDate": "Dec 24, 2026",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2026-12-31",
+    "endDate": "2026-12-31",
+    "title": "Garbage Day",
+    "displayDate": "Dec 31, 2026",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-01-07",
+    "endDate": "2027-01-07",
+    "title": "Garbage Day",
+    "displayDate": "Jan 7, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-01-14",
+    "endDate": "2027-01-14",
+    "title": "Garbage Day",
+    "displayDate": "Jan 14, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-01-21",
+    "endDate": "2027-01-21",
+    "title": "Garbage Day",
+    "displayDate": "Jan 21, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-01-28",
+    "endDate": "2027-01-28",
+    "title": "Garbage Day",
+    "displayDate": "Jan 28, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-02-04",
+    "endDate": "2027-02-04",
+    "title": "Garbage Day",
+    "displayDate": "Feb 4, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-02-11",
+    "endDate": "2027-02-11",
+    "title": "Garbage Day",
+    "displayDate": "Feb 11, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-02-18",
+    "endDate": "2027-02-18",
+    "title": "Garbage Day",
+    "displayDate": "Feb 18, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-02-25",
+    "endDate": "2027-02-25",
+    "title": "Garbage Day",
+    "displayDate": "Feb 25, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-03-04",
+    "endDate": "2027-03-04",
+    "title": "Garbage Day",
+    "displayDate": "Mar 4, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-03-11",
+    "endDate": "2027-03-11",
+    "title": "Garbage Day",
+    "displayDate": "Mar 11, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-03-18",
+    "endDate": "2027-03-18",
+    "title": "Garbage Day",
+    "displayDate": "Mar 18, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-03-25",
+    "endDate": "2027-03-25",
+    "title": "Garbage Day",
+    "displayDate": "Mar 25, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-04-01",
+    "endDate": "2027-04-01",
+    "title": "Garbage Day",
+    "displayDate": "Apr 1, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-04-08",
+    "endDate": "2027-04-08",
+    "title": "Garbage Day",
+    "displayDate": "Apr 8, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-04-15",
+    "endDate": "2027-04-15",
+    "title": "Garbage Day",
+    "displayDate": "Apr 15, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-04-22",
+    "endDate": "2027-04-22",
+    "title": "Garbage Day",
+    "displayDate": "Apr 22, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-04-29",
+    "endDate": "2027-04-29",
+    "title": "Garbage Day",
+    "displayDate": "Apr 29, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-05-06",
+    "endDate": "2027-05-06",
+    "title": "Garbage Day",
+    "displayDate": "May 6, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-05-13",
+    "endDate": "2027-05-13",
+    "title": "Garbage Day",
+    "displayDate": "May 13, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-05-20",
+    "endDate": "2027-05-20",
+    "title": "Garbage Day",
+    "displayDate": "May 20, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-05-27",
+    "endDate": "2027-05-27",
+    "title": "Garbage Day",
+    "displayDate": "May 27, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-06-03",
+    "endDate": "2027-06-03",
+    "title": "Garbage Day",
+    "displayDate": "Jun 3, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-06-10",
+    "endDate": "2027-06-10",
+    "title": "Garbage Day",
+    "displayDate": "Jun 10, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-06-17",
+    "endDate": "2027-06-17",
+    "title": "Garbage Day",
+    "displayDate": "Jun 17, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-06-24",
+    "endDate": "2027-06-24",
+    "title": "Garbage Day",
+    "displayDate": "Jun 24, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-07-01",
+    "endDate": "2027-07-01",
+    "title": "Garbage Day",
+    "displayDate": "Jul 1, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-07-08",
+    "endDate": "2027-07-08",
+    "title": "Garbage Day",
+    "displayDate": "Jul 8, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-07-15",
+    "endDate": "2027-07-15",
+    "title": "Garbage Day",
+    "displayDate": "Jul 15, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-07-22",
+    "endDate": "2027-07-22",
+    "title": "Garbage Day",
+    "displayDate": "Jul 22, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-07-29",
+    "endDate": "2027-07-29",
+    "title": "Garbage Day",
+    "displayDate": "Jul 29, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-08-05",
+    "endDate": "2027-08-05",
+    "title": "Garbage Day",
+    "displayDate": "Aug 5, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-08-12",
+    "endDate": "2027-08-12",
+    "title": "Garbage Day",
+    "displayDate": "Aug 12, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-08-19",
+    "endDate": "2027-08-19",
+    "title": "Garbage Day",
+    "displayDate": "Aug 19, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-08-26",
+    "endDate": "2027-08-26",
+    "title": "Garbage Day",
+    "displayDate": "Aug 26, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-09-02",
+    "endDate": "2027-09-02",
+    "title": "Garbage Day",
+    "displayDate": "Sep 2, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-09-09",
+    "endDate": "2027-09-09",
+    "title": "Garbage Day",
+    "displayDate": "Sep 9, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-09-16",
+    "endDate": "2027-09-16",
+    "title": "Garbage Day",
+    "displayDate": "Sep 16, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-09-23",
+    "endDate": "2027-09-23",
+    "title": "Garbage Day",
+    "displayDate": "Sep 23, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-09-30",
+    "endDate": "2027-09-30",
+    "title": "Garbage Day",
+    "displayDate": "Sep 30, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-10-07",
+    "endDate": "2027-10-07",
+    "title": "Garbage Day",
+    "displayDate": "Oct 7, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-10-14",
+    "endDate": "2027-10-14",
+    "title": "Garbage Day",
+    "displayDate": "Oct 14, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-10-21",
+    "endDate": "2027-10-21",
+    "title": "Garbage Day",
+    "displayDate": "Oct 21, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-10-28",
+    "endDate": "2027-10-28",
+    "title": "Garbage Day",
+    "displayDate": "Oct 28, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-11-04",
+    "endDate": "2027-11-04",
+    "title": "Garbage Day",
+    "displayDate": "Nov 4, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-11-11",
+    "endDate": "2027-11-11",
+    "title": "Garbage Day",
+    "displayDate": "Nov 11, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-11-18",
+    "endDate": "2027-11-18",
+    "title": "Garbage Day",
+    "displayDate": "Nov 18, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-11-25",
+    "endDate": "2027-11-25",
+    "title": "Garbage Day",
+    "displayDate": "Nov 25, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-12-02",
+    "endDate": "2027-12-02",
+    "title": "Garbage Day",
+    "displayDate": "Dec 2, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-12-09",
+    "endDate": "2027-12-09",
+    "title": "Garbage Day",
+    "displayDate": "Dec 9, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-12-16",
+    "endDate": "2027-12-16",
+    "title": "Garbage Day",
+    "displayDate": "Dec 16, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-12-23",
+    "endDate": "2027-12-23",
+    "title": "Garbage Day",
+    "displayDate": "Dec 23, 2027",
+    "location": "",
+    "description": ""
+  },
+  {
+    "date": "2027-12-30",
+    "endDate": "2027-12-30",
+    "title": "Garbage Day",
+    "displayDate": "Dec 30, 2027",
+    "location": "",
+    "description": ""
   }
 ]
