@@ -626,4 +626,39 @@ h1,h2,h3,.community-content h2{font-family:'Libre Baskerville',Georgia,serif;let
   }, {passive:true});
   main.addEventListener('touchcancel', function () { start = null; }, {passive:true});
 })();
-</script></body></html>
+</script><script id="auburn-cove-click-analytics">
+/* Anonymous interaction tracking. Never send contact-form entries or personal details. */
+(function () {
+  var sectionIds = ['home','calendar','outreach','contact','documents','zoom','newsletter'];
+  var sectionLabels = {home:'Home',calendar:'Calendar',outreach:'Community Outreach',contact:'Contact',documents:'Documents',zoom:'HOA Meeting',newsletter:'Newsletters'};
+  function sectionName(element) {
+    var section = element.closest('[id]');
+    while (section) {
+      if (sectionIds.indexOf(section.id) !== -1) return sectionLabels[section.id];
+      section = section.parentElement ? section.parentElement.closest('[id]') : null;
+    }
+    return sectionLabels[(location.hash || '#home').slice(1)] || 'Home';
+  }
+  function send(name, action, section) {
+    if (typeof window.gtag !== 'function') return;
+    window.gtag('event', name, {button_name: action, site_section: section, event_category: 'site_interaction'});
+  }
+  document.addEventListener('click', function (event) {
+    var target = event.target.closest('a, button');
+    if (!target) return;
+    var section = sectionName(target);
+    if (target.matches('#menu')) return send('button_click', 'Open navigation menu', section);
+    if (target.matches('#auburn-success-dismiss')) return send('button_click', 'Dismiss contact confirmation', section);
+    if (target.matches('button[type="submit"]') && target.closest('#auburn-contact-form')) return send('button_click', 'Submit contact form', 'Contact');
+    if (target.matches('button')) return; // Unknown controls: avoid sending user-provided labels.
+    var href = target.getAttribute('href') || '';
+    if (href.charAt(0) === '#') return send('navigation_click', sectionLabels[href.slice(1)] || 'Internal section', section);
+    if (/analytics\.google\.com/.test(href)) return send('button_click', 'Admin Login', section);
+    if (/accesssentrymgt\.com/.test(href)) return send('button_click', 'Open Sentry Management', section);
+    if (/freeconferencecall\.com/.test(href)) return send('button_click', 'Join HOA Meeting', section);
+    if (/Holiday Gifts for Kids Drop Off\.pdf/i.test(href)) return send('file_download_click', 'Holiday Gifts Flyer', section);
+    if (/Auburn_Cove_November_2026_Newsletter_Mockup\.pdf/i.test(href)) return send('file_download_click', 'Newsletter PDF', section);
+  }, {passive: true});
+})();
+</script>
+</body></html>
